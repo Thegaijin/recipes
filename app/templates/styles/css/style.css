@@ -40,7 +40,8 @@ body {
     background-size: cover;
 }
 
-.card {
+.card,
+.cat-container {
     margin: -154px 0 0 -418px;
     top: 40%;
     width: 62%;
@@ -261,8 +262,8 @@ header {
 }
 
 header h4.logo {
-    margin: 0;
-    font-size: 1.7em;
+    margin: 7px auto;
+    font-size: 1.4em;
     color: #fff;
     text-transform: uppercase;
     float: left;
@@ -298,4 +299,39 @@ header h4.logo:hover {
 .container {
     width: 940px;
     margin: 0 auto;
+}
+
+
+/* Categories and contents */
+
+.cat-jumbo {
+    background-image: url("../css/images/spices.jpg");
+    height: 610px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.cat-container {
+    width: 70%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    background-color: rgba(255, 255, 255, 0.4);
+    margin: -154px 0 0 -460px;
+    border-radius: 10px;
+}
+
+#cat-header h3 {
+    text-align: center;
+    font-family: Bellefair;
+    padding: 30px 0;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px white;
+    margin-left: 50px;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(15, 1, 1, 0.2);
 }

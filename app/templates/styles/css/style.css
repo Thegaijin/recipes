@@ -335,3 +335,26 @@ header h4.logo:hover {
     border-top: 1px solid #f8f8f8;
     border-bottom: 1px solid rgba(15, 1, 1, 0.2);
 }
+
+.cat-buttons,
+.close-cat {
+    padding: 5px 0 0 0;
+    text-align: center;
+}
+
+.modal-body .container {
+    width: 60%;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.btn-lg {
+    margin-bottom: 10px;
+}

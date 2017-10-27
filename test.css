@@ -27,7 +27,7 @@ body {
 }
 
 
-/* All content div */
+/* Main div */
 
 .post-jumbo {
     background-image: url("../css/images/black-salad.jpg");
@@ -140,6 +140,11 @@ body {
     width: 100%;
 }
 
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
 .login-table-password {
     width: 99%;
     padding-right: 5px;
@@ -150,77 +155,8 @@ body {
     vertical-align: top;
 }
 
-.signin .submit {
-    height: 30px;
-    line-height: 11px;
-}
 
-.signup .submit {
-    margin-right: 12px;
-}
-
-.button-top {
-    background-color: white;
-    border: 1px solid #ffc300;
-    color: #ffc300;
-}
-
-.button-other {
-    background-color: #fff;
-    border: 1px solid #ffc300;
-    color: #ffc300;
-    border-radius: 20px;
-}
-
-.button-radius {
-    font-size: 14px;
-    line-height: 20px;
-    padding: 6px 16px;
-    border-radius: 20px;
-}
-
-.button-login,
-.button-login:visited {
-    border-radius: 100px;
-    box-shadow: none;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 20px;
-    padding: 6px 16px;
-    position: relative;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.u-floatRight {
-    float: right !important;
-}
-
-button {
-    background: transparent;
-    background-color: transparent;
-    border: 0;
-    padding: 0;
-}
-
-.login-table-btn {
-    float: right;
-    width: auto;
-    white-space: nowrap;
-}
-
-.signin .forget {
-    margin-top: 4px;
-}
-
-.signin .forgot {
-    color: #657786;
-    display: inline;
-    font-size: 12px;
-    line-height: 16px;
-    margin: 0;
-}
+/* Forms */
 
 .form {
     position: relative;
@@ -242,4 +178,75 @@ button {
     box-sizing: border-box;
     font-size: 14px;
     border: 1px solid #ccd6dd;
+}
+
+.signin .submit {
+    height: 30px;
+    line-height: 11px;
+}
+
+.signup .submit {
+    margin-right: 12px;
+}
+
+.EdgeButton--primary {
+    background-color: white;
+    border: 1px solid #ffc300;
+    color: #ffc300;
+}
+
+.EdgeButton--secondary {
+    background-color: #fff;
+    border: 1px solid #ffc300;
+    color: #ffc300;
+}
+
+.EdgeButton--medium {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 6px 16px;
+}
+
+.EdgeButton,
+.EdgeButton:visited {
+    border-radius: 100px;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.u-floatRight {
+    float: right !important;
+}
+
+button {
+    background: transparent;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+.login-table-btn {
+    float: right;
+    width: auto;
+    white-space: nowrap;
+}
+
+.signin .remember-forgot {
+    margin-top: 4px;
+}
+
+.signin .forgot {
+    color: #657786;
+    display: inline;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0;
 }

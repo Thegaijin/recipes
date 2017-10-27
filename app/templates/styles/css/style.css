@@ -29,6 +29,13 @@ body {
 
 /* All content div */
 
+.post-jumbo {
+    background-image: url("../css/images/black-salad.jpg");
+    height: 645px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .card {
     margin: -154px 0 0 -418px;
     top: 40%;

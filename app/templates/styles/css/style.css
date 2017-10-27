@@ -1,0 +1,253 @@
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+img,
+form,
+fieldset,
+blockquote {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+    width: 100%;
+}
+
+
+/* All content div */
+
+.card {
+    margin: -154px 0 0 -418px;
+    top: 40%;
+    width: 62%;
+    left: 50%;
+    position: absolute;
+}
+
+
+/* Welcome text div */
+
+.welcome-area {
+    background: #000;
+    border: 0;
+    display: block;
+    float: left;
+    height: 328px;
+    width: 520px;
+    background: 0;
+    box-shadow: none;
+    height: 410px;
+}
+
+.welcome {
+    padding: 0;
+    bottom: 50%;
+    height: 328px;
+    top: 0;
+    bottom: 0;
+    color: #b6070d;
+    font-size: 21px;
+    font-weight: bold;
+    left: 0;
+    line-height: 28px;
+    padding: 20px;
+    position: absolute;
+    text-align: left;
+    width: 470px;
+}
+
+
+/* #a3080c */
+
+.welcome h1 {
+    color: #ffc300;
+    font-size: 45px;
+    line-height: 32px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px #76b852;
+}
+
+
+/* #FFDB58 */
+
+.welcome p {
+    color: #a3080c;
+    font-size: 21px;
+    line-height: 28px;
+    font-weight: bold;
+}
+
+
+/* Sign in and signup divs */
+
+.signin {
+    border: 1px solid #e6ecf0;
+}
+
+.signin {
+    background: #fff;
+}
+
+.signin {
+    float: right;
+    margin-bottom: 11px;
+    width: 300px;
+}
+
+.signin {
+    margin: 12px 12px 6px;
+}
+
+.signin h2 {
+    border-bottom: 1px solid #e6ecf0;
+    color: #66757f;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    position: relative;
+}
+
+
+/* Password login table */
+
+.login-table {
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.login-table-primary {
+    width: 99%;
+    padding-right: 5px;
+}
+
+.login-table-primary,
+.login-table-secondary {
+    vertical-align: top;
+}
+
+.login-table-secondary {
+    width: 1%;
+    max-width: 1%;
+}
+
+.signin .password {
+    width: 100%;
+}
+
+.signin .text-input {
+    border: 1px solid #ccd6dd;
+}
+
+.signin .submit {
+    height: 30px;
+    line-height: 11px;
+}
+
+.card .text-input {
+    height: 20px;
+}
+
+.signin .password .text-input {
+    height: 30px;
+}
+
+.password input {
+    width: 98%;
+}
+
+.buttonn {
+    background-color: #fff;
+    border: 1px solid #ffc300;
+    color: #ffc300;
+}
+
+.buttonm {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 6px 16px;
+}
+
+.button-login,
+.button-login:visited {
+    border-radius: 100px;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.u-floatRight {
+    float: right !important;
+}
+
+button {
+    background: transparent;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+}
+
+.login-table-btn {
+    float: right;
+    width: auto;
+    white-space: nowrap;
+}
+
+.signin .forget {
+    margin-top: 4px;
+}
+
+.signin .forgot {
+    color: #657786;
+    display: inline;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    max-width: 1000px;
+    margin: 0 auto 0;
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border: 1px solid #ccd6dd;
+}

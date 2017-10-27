@@ -94,11 +94,13 @@ body {
 
 /* Sign in and signup divs */
 
-.signin {
+.signin,
+.signup {
     border: 1px solid #e6ecf0;
 }
 
-.signin {
+.signin,
+.signup {
     background: #fff;
 }
 
@@ -108,10 +110,18 @@ body {
     width: 300px;
 }
 
-.signin {
+.signup {
+    float: right;
+    padding-bottom: 8px;
+    width: 300px;
+}
+
+.signin,
+.signup {
     margin: 12px 12px 6px;
 }
 
+.signup h2,
 .signin h2 {
     border-bottom: 1px solid #e6ecf0;
     color: #66757f;
@@ -154,7 +164,8 @@ table {
     width: 100%;
 }
 
-.signin .text-input {
+.signin .text-input,
+.signup .text-input {
     border: 1px solid #ccd6dd;
 }
 
@@ -175,16 +186,26 @@ table {
     width: 98%;
 }
 
-.buttonn {
+.signup .submit {
+    margin-right: 12px;
+}
+
+.card .text-input {
+    height: 20px;
+}
+
+.button-other {
     background-color: #fff;
     border: 1px solid #ffc300;
     color: #ffc300;
+    border-radius: 20px;
 }
 
-.buttonm {
+.button-radius {
     font-size: 14px;
     line-height: 20px;
     padding: 6px 16px;
+    border-radius: 20px;
 }
 
 .button-login,
@@ -199,6 +220,12 @@ table {
     position: relative;
     text-align: center;
     white-space: nowrap;
+}
+
+.button-top {
+    background-color: white;
+    border: 1px solid #ffc300;
+    color: #ffc300;
 }
 
 .u-floatRight {

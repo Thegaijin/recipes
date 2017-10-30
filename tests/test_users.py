@@ -22,8 +22,16 @@ def test_users_is_instance(user):
 
 def test_users_raise_error_if_argument_not_string(user):
     ''' Test if the parameter passed to a category is a string '''
+    
     with pytest.raises(TypeError):
         user.create_category(2347)
+
+
+def test_users_category_doesnt_already_exist(user):
+    ''' Test if the category to be created does not already exist '''
+
+    user.create_category("cakes")
+    assert "cakes" not in user.categories
 
 
 def test_users_category_is_created(user):
@@ -34,8 +42,3 @@ def test_users_category_is_created(user):
     after_length = len(user.categories)
     x = after_length - before_length
     assert x == 1
-
-
-def test_users_category_doesnt_already_exist(user):
-    ''' Test if the category to be created does not already exist '''
-    pass

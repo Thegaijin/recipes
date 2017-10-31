@@ -7,6 +7,10 @@ import pytest
 from app.models.users import User
 from app.models.category import category
 
+#######################################################################
+#                            CATEGORY TESTS                           #
+#######################################################################
+
 
 @pytest.fixture(scope='module')
 def user():
@@ -20,9 +24,9 @@ def test_users_is_instance(user):
     assert isinstance(user, User) == True
 
 
-def test_users_raise_error_if_argument_not_string(user):
+def test_users_category_raise_error_if_argument_not_string(user):
     ''' Test if the parameter passed to a category is a string '''
-    
+
     with pytest.raises(TypeError):
         user.create_category(2347)
 
@@ -42,3 +46,15 @@ def test_users_category_is_created(user):
     after_length = len(user.categories)
     x = after_length - before_length
     assert x == 1
+
+
+def test_users_category_is_viewed(user):
+    ''' Test if the category can be viewed '''
+
+    user.create_category("cakes")
+    assert user.view_category('cakes') == user.categories['cakes']
+
+
+def test_if_user_category_can_be_edited(user):
+    ''' Test if the category can be edited '''
+    user.create_category("cakes")

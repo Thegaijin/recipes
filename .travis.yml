@@ -9,7 +9,6 @@ install:
   - pip install coveralls
 # command to run tests
 script:
-  - pytest # or py.test for Python versions 3.5 and below
-  - coverage run source=tests
+  - pytest --with-coverage --cover-package=app
 after_success:
     - coveralls

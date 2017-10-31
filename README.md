@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Thegaijin/recipes.svg?branch=master)](https://travis-ci.org/Thegaijin/recipes)
+[![Coverage Status](https://coveralls.io/repos/github/Thegaijin/recipes/badge.svg?branch=master)](https://coveralls.io/github/Thegaijin/recipes?branch=master)
 # Recipes
 This application allows users to register an account and login to create, save and share recipes.
 

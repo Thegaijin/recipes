@@ -8,7 +8,9 @@ class User(object):
         self.categories = {}
 
     def create_category(self, name):
-        ''' Creates the Category '''
+        ''' Creates the Category 
+        :param: name
+        '''
         pass
 
     def view_category(self, name):

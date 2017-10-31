@@ -64,6 +64,7 @@ def test_if_user_category_can_be_edited(user):
 
 def test_if_user_category_can_be_deleted(user):
     ''' Test if categories can be deleted '''
+    user.create_category("cakes")
     before_length = len(user.categories)
     user.delete_category("cakes")
     after_length = len(user.categories)

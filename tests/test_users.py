@@ -15,7 +15,7 @@ from app.models.category import category
 @pytest.fixture(scope='module')
 def user():
     ''' Returns an instance of the User class '''
-    return User(1, "username", "password")
+    return User()
 
 
 def test_users_is_instance(user):

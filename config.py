@@ -1,6 +1,5 @@
 # config.py
 # Third party import
-import os
 
 
 class Config(object):

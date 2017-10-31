@@ -20,6 +20,6 @@ def create_app(config_name):
     return app
 
 
-# import at the end to avoid circular reference
+# imported at the end to avoid circular reference
 # local import
 ''' from app import views '''

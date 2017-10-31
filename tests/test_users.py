@@ -5,7 +5,7 @@ import pytest
 
 # local imports
 from app.models.users import User
-from app.models.category import category
+from app.models.category import Category
 
 #######################################################################
 #                            CATEGORY TESTS                           #

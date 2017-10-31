@@ -58,3 +58,14 @@ def test_users_category_is_viewed(user):
 def test_if_user_category_can_be_edited(user):
     ''' Test if the category can be edited '''
     user.create_category("cakes")
+    user.edit_category("cakes", "bakes")
+    # TODO: finish this
+
+
+def test_if_user_category_can_be_deleted(user):
+    ''' Test if categories can be deleted '''
+    before_length = len(user.categories)
+    user.delete_category("cakes")
+    after_length = len(user.categories)
+    x = before_length - after_length
+    assert x == 1

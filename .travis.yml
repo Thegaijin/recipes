@@ -9,7 +9,8 @@ install:
   - pip install coveralls
 # command to run tests
 script:
-  - coverage run --source recipes -m pytest
-  - coverage report
-after_success:
-    - coveralls
+  - pytest
+#   - coverage run --source recipes -m pytest
+#  - coverage report
+# after_success:
+#    - coveralls

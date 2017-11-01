@@ -1,6 +1,6 @@
 # app/models/users.py
-from app.models.category import Category
-from app.models.recipe import Recipe
+from category import Category
+from recipe import Recipe
 
 
 class User(object):
@@ -9,7 +9,7 @@ class User(object):
     def __init__(self):
         self.categories = {}
 
-    def create_category(self, category_name, description):
+    def create_category(self, category_name):
         ''' Creates the Category 
             Takes in one parameter, a string and creates an instance of the 
             class category and adds it to the categories dictionary

@@ -41,8 +41,8 @@ class User(object):
             dictionary for a key that matches the first string.Reassigns the 
             value to the 2nd string as the key, deletes the first strings pair.
 
-            :param category_name: A string: the name of the category to view
-            :return: The key and value pair that matches the category name 
+            :param category_name: A string: the name of the category to edit
+            :return: The dictionary categories
         '''
         if category_name in self.categories:
             self.categories[new_category_name] = self.categories[category_name]
@@ -53,27 +53,33 @@ class User(object):
         ''' Takes in one parameter, checks the categories dictionary for a key 
             that matches the first string. Deletes the key value pair.
 
-            :param category_name: A string: the name of the category to view
+            :param category_name: A string: the name of the category to delete
             :return: The key and value pair that matches the category name 
         '''
-        if category_name in self.categories:
-            del self.categories[category_name]
-            return self.categories
+
+        del self.categories[category_name]
+        return self.categories
 
     def create_recipe(self, category_name, recipe_name):
-        ''' Creates a recipe '''
-        pass
+        ''' Takes in twe parameters, checks categories dictionary for key
+            category_name. Creates a class instance recipe_name of class Recipe
+            then appends the recipe_name to category_name's value, a list.
+
+            :param category_name: A string: the name of the category
+            :param recipe_name: A string: the name of the recipe
+            :return: The key and value pair that matches the category_name
+        '''
 
     def view_recipe(self, category_name, recipe_name):
-        ''' Creates a recipe '''
+        ''' Views a recipe '''
         pass
 
     def edit_recipe(self, category_name, recipe_name, new_recipe_name):
-        ''' Creates a recipe '''
+        ''' Edits a recipe '''
         pass
 
     def delete_recipe(self, category_name, recipe_name):
-        ''' Creates a recipe '''
+        ''' Deletes a recipe '''
         pass
 
 

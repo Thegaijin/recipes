@@ -1,4 +1,6 @@
 # app/models/users.py
+from app.models.category import Category
+from app.models.recipe import Recipe
 
 
 class User(object):
@@ -7,20 +9,21 @@ class User(object):
     def __init__(self):
         self.categories = {}
 
-    def create_category(self, category_name):
+    def create_category(self, category_name, description):
         ''' Creates the Category 
-            Takes in one parameter, a string and adds it as a key to a 
-            dictionary with a value of an empty list to hold recipes
+            Takes in one parameter, a string and creates an instance of the 
+            class category and adds it to the categories dictionary
 
             :param category_name: A string: the name of the category to create
-            :return: Categories dictionary, with the names as the keys and an 
-            empty list as the values
+            :return: Categories dictionary, with the names as the keys and the 
+            instance as the value
         '''
         if not isinstance(category_name, str):
             raise TypeError('Input should be a string')
 
         if category_name not in self.categories:
-            self.categories[category_name] = []
+            new_category = Category(category_name)
+            self.categories[category_name] = new_category
             return self.categories
         return ""
 
@@ -30,11 +33,9 @@ class User(object):
             dictionary for a key that matches the string.
 
             :param category_name: A string: the name of the category to view
-            :return: The key and value pair that matches the category name 
+            :return: The value of key that matches category name 
         '''
-        viewed = {k: v for k, v in self.categories.items()
-                  if category_name in k}
-        return viewed
+        return self.categories[category_name]
 
     def edit_category(self, category_name, new_category_name):
         ''' Takes in two parameters, 2 strings and checks the categories 
@@ -61,7 +62,7 @@ class User(object):
         return self.categories
 
     def create_recipe(self, category_name, recipe_name):
-        ''' Takes in twe parameters, checks categories dictionary for key
+        ''' Takes in two parameters, checks categories dictionary for key
             category_name. Creates a class instance recipe_name of class Recipe
             then appends the recipe_name to category_name's value, a list.
 

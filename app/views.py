@@ -2,6 +2,7 @@
 
 # Local imports
 from app import app
+
 # Third party imports
 from flask import render_template
 

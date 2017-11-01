@@ -1,12 +1,20 @@
 # app/models/users.py
+
+# Local imports
 from app.models.category import Category
 from app.models.recipe import Recipe
 
+# Third party imports
+from flask_login import UserMixin
 
-class User(object):
+
+class User(UserMixin):
     ''' Creates and manipulates categories and recipes '''
 
-    def __init__(self):
+    def __init__(self, id, username, hashed_pswd):
+        self.id = id
+        self.username = username
+        self.hashed_pswd = hashed_pswd
         self.categories = {}
 
     def create_category(self, category_name):
@@ -112,9 +120,10 @@ class User(object):
             :param recipe_name: A string: the name of the recipe
             :return: The list in the category instance
         '''
-        
+
         del self.categories[category_name].recipes[recipe_name]
         return self.categories[category_name].recipes
+
 
 new = User()
 print(new.create_category("Cakes"))

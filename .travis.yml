@@ -10,6 +10,8 @@ install:
 # command to run tests
 script:
   - pytest
+
+  
 #  - coverage run --source recipes -m pytest
 #  - coverage report
 # after_success:

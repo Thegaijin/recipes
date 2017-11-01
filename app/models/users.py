@@ -35,10 +35,11 @@ class User(object):
             :param category_name: A string: the name of the category to view
             :return: The value of key that matches category name 
         '''
-        return self.categories[category_name]
+        return self.categories[category_name].category_name
 
     def edit_category(self, category_name, new_category_name):
-        ''' Takes in two parameters, 2 strings and checks the categories 
+        ''' Editing a category
+            Takes in two parameters, 2 strings and checks the categories 
             dictionary for a key that matches the first string.Reassigns the 
             value to the 2nd string as the key, deletes the first strings pair.
 
@@ -51,43 +52,74 @@ class User(object):
             return self.categories
 
     def delete_category(self, category_name):
-        ''' Takes in one parameter, checks the categories dictionary for a key 
+        ''' Deleting a category
+            Takes in one parameter, checks the categories dictionary for a key 
             that matches the first string. Deletes the key value pair.
 
             :param category_name: A string: the name of the category to delete
-            :return: The key and value pair that matches the category name 
+            :return: The remaining categories
         '''
 
         del self.categories[category_name]
         return self.categories
 
     def create_recipe(self, category_name, recipe_name):
-        ''' Takes in two parameters, checks categories dictionary for key
+        ''' Creates recipes in a specified category.
+            Takes in two parameters, checks categories dictionary for key
             category_name. Creates a class instance recipe_name of class Recipe
             then appends the recipe_name to category_name's value, a list.
 
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
-            :return: The key and value pair that matches the category_name
+            :return: The list in the category instance
         '''
         the_category = self.categories[category_name]
         new_recipe = Recipe(recipe_name)
-        the_category.recipes.append(new_recipe)
+        the_category.recipes[recipe_name] = new_recipe
+        return the_category.recipes
 
     def view_recipe(self, category_name, recipe_name):
-        ''' Views a recipe '''
+        ''' Views a recipe 
+            Takes in two parameters, checks categories dictionary for key
+            category_name. checks the recipes list in the category for the 
+            recipe name
+
+
+            :param category_name: A string: the name of the category
+            :param recipe_name: A string: the name of the recipe
+            :return: The list in the category instance
+        '''
         the_recipes = self.categories[category_name].recipes
+        print(the_recipes)
+        ''' recipe_names = [recipe.recipe_name for recipe in the_recipes]
+        if recipe_name in recipe_names: '''
+        ''' return recipe_name '''
+        if recipe_name in the_recipes:
+            return the_recipes[recipe_name].recipe_name
 
     def edit_recipe(self, category_name, recipe_name, new_recipe_name):
         ''' Edits a recipe '''
         pass
 
     def delete_recipe(self, category_name, recipe_name):
-        ''' Deletes a recipe '''
-        pass
+        ''' Deletes a recipe 
+            Takes in two parameters, checks categories dictionary for key
+            category_name. checks the recipes list in the category for the 
+            recipe name. deletes the recipe
 
+
+            :param category_name: A string: the name of the category
+            :param recipe_name: A string: the name of the recipe
+            :return: The list in the category instance
+        '''
+        
+        del self.categories[category_name].recipes[recipe_name]
+        return self.categories[category_name].recipes
 
 new = User()
 print(new.create_category("Cakes"))
-print(new.create_category("chapati"))
-print(new.view_category('chapati'))
+print(new.create_recipe('Cakes', 'cupcake'))
+print(new.create_recipe('Cakes', 'bun'))
+print(new.create_recipe('Cakes', 'croissant'))
+print(new.view_recipe('Cakes', 'croissant'))
+print(new.delete_recipe('Cakes', 'croissant'))

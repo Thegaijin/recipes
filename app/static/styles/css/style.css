@@ -34,7 +34,7 @@ body {
 }
 
 .post-jumbo {
-    background-image: url("../css/images/black-salad.jpg");
+    background-image: url("/static/img/black-salad.jpg");
     height: 645px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -305,7 +305,7 @@ header h4.logo:hover {
 /* Categories and contents */
 
 .cat-jumbo {
-    background-image: url("../css/images/spices.jpg");
+    background-image: url("/static/img/spices.jpg");
     height: 610px;
     background-repeat: no-repeat;
     background-size: cover;

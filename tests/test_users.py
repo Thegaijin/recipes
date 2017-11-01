@@ -79,6 +79,8 @@ def test_if_user_category_can_be_deleted(new_user, category):
     post_length = len(new_user.categories)
     x = pre_length - post_length
     assert x == 1
+    result = new_user.delete_category("cakes")
+    # assert "cakes" not in result
     assert 'cakes' not in new_user.categories
 
 #######################################################################
@@ -101,8 +103,8 @@ def test_users_recipe_doesnt_already_exist(new_user):
     assert "cupcakes" not in new_user.categories['cakes']
 
 
-def test_if_users_recipe_is_created(new_user, category):
-    ''' Test if the recipe is created and added to the list '''
+''' def test_if_users_recipe_is_created(new_user, category):
+    Test if the recipe is created and added to the list
 
     pre_length = len(new_user.categories['cakes'])
     new_user.create_recipe('cakes', 'cupcake')
@@ -113,23 +115,23 @@ def test_if_users_recipe_is_created(new_user, category):
 
 
 def test_if_users_recipes_is_viewed(new_user, category):
-    ''' Test if the recipe can be viewed '''
+    Test if the recipe can be viewed
     viewed = new_user.view_recipe('cakes', 'cupcakes')
     assert 'cupcakes' in new_user.categories['cakes']
     # FIXME: Not clear, cross check in the morning
 
 
 def test_users_edit_recipes(new_user, category):
-    ''' Test if the recipe can be edited '''
+    Test if the recipe can be edited 
     new_user.edit_recipe('cakes', 'cupcakes')
     # TODO:
 
 
 def test_user_can_delete_recipe(new_user, category):
-    ''' Test if a recipe can be deleted from a category '''
+    Test if a recipe can be deleted from a category 
     pre_length = len(new_user.categories['cakes'])
     new_user.delete_recipe("cakes", "cupcakes")
     post_length = len(new_user.categories['cakes'])
     x = pre_length - post_length
     assert x == 1
-    assert 'cupcakes' not in new_user.categories['cakes']
+    assert 'cupcakes' not in new_user.categories['cakes'] '''

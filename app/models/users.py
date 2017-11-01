@@ -1,6 +1,6 @@
 # app/models/users.py
-from category import Category
-from recipe import Recipe
+from app.models.category import Category
+from app.models.recipe import Recipe
 
 
 class User(object):

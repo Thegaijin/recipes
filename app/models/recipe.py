@@ -6,4 +6,4 @@ class Recipe(object):
 
     def __init__(self, recipe_name):
         self.recipe_name = recipe_name
-        self.ingredients = {}
+        self.ingredients = []

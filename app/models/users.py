@@ -70,10 +70,13 @@ class User(object):
             :param recipe_name: A string: the name of the recipe
             :return: The key and value pair that matches the category_name
         '''
+        the_category = self.categories[category_name]
+        new_recipe = Recipe(recipe_name)
+        the_category.recipes.append(new_recipe)
 
     def view_recipe(self, category_name, recipe_name):
         ''' Views a recipe '''
-        pass
+        the_recipes = self.categories[category_name].recipes
 
     def edit_recipe(self, category_name, recipe_name, new_recipe_name):
         ''' Edits a recipe '''

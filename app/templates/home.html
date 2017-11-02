@@ -1,0 +1,25 @@
+{% import "bootstrap/utils.html" as utils %}{% import "bootstrap/wtf.html" as wtf %}{% extends "layout.html" %}{% block yummy %}
+<div class="post-jumbo">
+    <div class="card">
+        <div class="welcome-area">
+
+            <div class="welcome">
+                <h1>Yummy Recipes</h1>
+                <p>Welcome to Yummy recipes,<br> Create and share your savory ideas with us. Lets whet our palettes together. Happy creating</p>
+            </div>
+            {{ utils.flashed_messages() }}
+        </div>
+        <div class="signup">
+            <h2 style="text-align: center;">
+                <strong>New to Yummy?</strong> Sign up
+            </h2>
+            <div class='form'>
+                <br/> {{ wtf.quick_form(form) }}
+            </div>
+            <p style="text-align: center;">Already have an account.
+                <a href="{{ url_for('signin') }}">Login</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock yummy %}

@@ -68,9 +68,8 @@
                         {% for category in categories %}
                         <tr>
                             <td> {{ category.category_name }} </td>
-                            {% for recipe in category.recipes % }
-                            <td> {{ recipe.recipe_name }} </td>
-                            {% endfor %}
+                            <td> {{ category.recipes.recipe_name }} </td>
+                            <!--  <td> z </td> -->
                             <td>
                                 <a href="">
                                     <i class="fa fa-pencil"></i> View

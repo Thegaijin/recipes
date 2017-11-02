@@ -99,7 +99,7 @@ def load_user(username):
     return user.users.get(username)
 
 
-@app.route('/add_category',  methods=["GET", "POST"])
+@app.route('/create_category',  methods=["GET", "POST"])
 @login_required
 def categories():
     '''Renders the categories '''
@@ -108,7 +108,7 @@ def categories():
         category_name = form.name.data
         other = form.description.data
 
-        if category_name not in user.users[current_user.username].categorise:
+        if category_name not in user.users[current_user.username].categories:
             # creating a user id
             if len(user.users[current_user.username].categories) == 0:
                 id = 1

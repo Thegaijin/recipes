@@ -22,7 +22,7 @@ class User(UserMixin):
 
         return self.username
 
-    def create_category(self, category_name):
+    def create_category(self, id, category_name):
         ''' Creates the Category 
             Takes in one parameter, a string and creates an instance of the 
             class category and adds it to the categories dictionary

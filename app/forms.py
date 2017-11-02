@@ -49,3 +49,11 @@ class LoginForm(FlaskForm):
             flash('Username does not exist.')
             raise ValidationError('Username does not exist.')
         return True
+
+
+class CreateForm(FlaskForm):
+    """Form for creating categories"""
+
+    name = StringField('Type here', validators=[DataRequired()])
+    description = StringField('Type here', validators=[DataRequired()])
+    submit = SubmitField('Create/Edit Category')

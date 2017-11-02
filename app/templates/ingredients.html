@@ -45,21 +45,7 @@
                             </div>
                             <div class="modal-body">
                                 <!--Add form-->
-                                <form method="POST" action="" class="">
-                                    <div class="container">
-                                        <div class="input-group">
-
-                                            <input type="text" id="tbox" name='Category_name' placeholder="Category name" class="form-control">
-                                            <input type="text" id="tbox" name='description' placeholder="description" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <div class="col-md-7 col-md-offset-2">
-                                            <input type="submit" class="btn btn-primary" value="Save list">
-                                        </div>
-                                    </div>
-                                </form>
+                                {{ wtf.quick_form(form) }}
                                 <!-- End form -->
                             </div>
                         </div>

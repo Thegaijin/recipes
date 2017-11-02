@@ -125,10 +125,12 @@ class User(UserMixin):
         return self.categories[category_name].recipes
 
 
-new = User()
+# TESTING THE FUNCTIONALITY:
+''' new = User(1, 'username', 'password')
 print(new.create_category("Cakes"))
 print(new.create_recipe('Cakes', 'cupcake'))
 print(new.create_recipe('Cakes', 'bun'))
 print(new.create_recipe('Cakes', 'croissant'))
 print(new.view_recipe('Cakes', 'croissant'))
 print(new.delete_recipe('Cakes', 'croissant'))
+ '''

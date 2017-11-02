@@ -19,7 +19,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 def index():
     register_form = RegisterForm()
     login_form = LoginForm()
-    return render_template('home.html', register_form=register_form, login_form=login_form)
+    return render_template('home.html', register_form=register_form,
+                           login_form=login_form)
 
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -56,7 +57,8 @@ def register():
         flash("User account was not created")
 
     # load sign up template
-    return render_template('home.html', form=form, title='Sign Up')
+    return render_template('home.html', form=form,
+                           login_form=LoginForm)
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -66,9 +68,9 @@ def signin():
     Log a user in through the login form
     """
     form = LoginForm()
-    if login.validate_on_submit():
-        username = login.username.data
-        password = login.password.data
+    if login_form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
 
         # return instance of current user
         loggedin = user.signin(username, password)
@@ -80,7 +82,8 @@ def signin():
             return redirect(url_for('categories'))
 
     # render the login template
-    return render_template('home.html', form=form)
+    return render_template('home.html', form=form,
+                           register_form=RegisterForm())
 
 
 @app.route('/categories', )

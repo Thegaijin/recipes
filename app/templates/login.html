@@ -17,16 +17,6 @@
             </div>
         </div>
 
-        <div class="signup">
-            <h2>
-                <strong>New to Yummy?</strong> Sign up
-            </h2>
-            <div class='form'>
-                <form action="{{ url_for('register') }}" method="post">
-                    {{ form.username.label }}{{ form.username }}{{ form.password.label }} {{ form.password }}{{ form.confirm_password.label }} {{ register_form.confirm_password }} {{ register_form.submit }}
-                </form>
-            </div>
-        </div>
     </div>
 </div>
 {% endblock yummy %}

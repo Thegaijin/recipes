@@ -15,7 +15,7 @@ from wtforms.validators import DataRequired, EqualTo
 user = YummyApp()
 
 
-class SignUpForm(FlaskForm):
+class RegisterForm(FlaskForm):
     ''' For creating user accounts '''
 
     username = StringField('Username', validators=[DataRequired()])

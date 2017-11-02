@@ -1,4 +1,4 @@
-{% import "bootstrap/utils.html" as utils %}{% extends "layout.html" %}{% block yummy %}
+{% import "bootstrap/utils.html" as utils %}{% import "bootstrap/wtf.html" as wtf %}{% extends "layout.html" %}{% block yummy %}
 <div class="post-jumbo">
     <div class="card">
         <div class="welcome-area">
@@ -11,10 +11,12 @@
         </div>
         <div class="signin">
             <div class='form'>
-                <form action="{{ url_for('signin') }}" method="post">
-                    {{ login_form.username.label }}{{ login_form.username }} {{ login_form.password.label }}{{ login_form.password }} {{ login_form.submit }}
-                </form>
+                <h4>Login</h4>
+                <br/> {{ wtf.quick_form(form) }}
             </div>
+            <p style="text-align: center;">Don't have an account.
+                <a href="{{ url_for('signin') }}">Sign up</a>
+            </p>
         </div>
 
     </div>

@@ -10,7 +10,7 @@ from .forms import RegisterForm, LoginForm, CreateForm
 
 # Third party imports
 from flask import render_template
-from flask import (flash, redirect, render_template, request, session, url_for)
+from flask import (flash, redirect, render_template, request, url_for)
 from flask_login import login_required, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -21,10 +21,8 @@ user = YummyApp()
 @app.route('/', methods=["GET", "POST"])
 def register():
     """Handle requests to the /signup route
-
     Create a new user through the sign up form
     """
-
     form = RegisterForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -70,9 +68,8 @@ def signin():
         loggedin = user.signin(username, password)
         flash("Welcome, {}".format(loggedin.username))
         if isinstance(loggedin, User):
-            flash("Now inside if statement")
             login_user(loggedin)
-            flash("After login user")
+
             return redirect(url_for('categories'))
 
     # render the login template
@@ -103,10 +100,12 @@ def load_user(username):
 @login_required
 def categories():
     '''Renders the categories '''
+
+    create_category = True
     form = CreateForm()
     if form.validate_on_submit():
         category_name = form.name.data
-        other = form.description.data
+        other = form.other.data
 
         if category_name not in user.users[current_user.username].categories:
             # creating a user id
@@ -117,18 +116,34 @@ def categories():
         all_categories = user.users[current_user.username].create_category(
             id, category_name)
         the_categories = list(all_categories.values())
-        print(the_categories)
-        flash(all_categories)
-        flash(type(all_categories))
-        flash(the_categories)
         return render_template('categories.html', form=form,
                                title="Categories", categories=the_categories)
+
     categories = user.users[current_user.username].categories
     the_categories = list(categories.values())
     return render_template('categories.html', form=form,
                            title="Categories", categories=the_categories)
 
 
-@app.route('/ingredients')
-def ingredients():
-    return render_template('ingredients.html')
+@app.route('/edit_category/<category_name>', methods=['GET', 'POST'])
+@login_required
+def edit_category(category_name):
+    """Enables the functionality on the /edit_category route"""
+
+    create_category = False
+    the_category = user.users[current_user.username].view_category(
+        category_name)
+    form = CreateForm(obj=the_category)
+    if form.validate_on_submit():
+        name = form.name.data
+        other = form.other.data
+
+        all_categories = user.users[current_user.username].edit_category(
+            name, other)
+        the_categories = list(all_categories.values())
+
+        return render_template('categories.html', form=form,
+                               title="Edit Category",
+                               categories=the_categories)
+    flash("Edit the {} list".format(category_name))
+    return render_template('categories.html', form=form, title="Edit Category")

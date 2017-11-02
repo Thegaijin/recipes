@@ -19,7 +19,7 @@
 <section>
     {% block yummy %}
     <div class="cat-jumbo">
-        {{ utils.flashed_messages() }}
+
         <span id='cat-header'>
             <h3>{% block recipe %}Recipe categories {% endblock recipe %}</h3>
         </span>
@@ -68,16 +68,16 @@
                         {% for category in categories %}
                         <tr>
                             <td> {{ category.category_name }} </td>
-                            {% for recipe in category.recipes % }
-                            <td> {{ recipe.recipe_name }} </td>
-                            {% endfor %}
+
+                            <td> {{ category.recipes.recipe_name }} </td>
+
                             <td>
                                 <a href="">
                                     <i class="fa fa-pencil"></i> View
                                 </a>
                             </td>
                             <td>
-                                <a href="">
+                                <a href="{{ url_for('edit_category', category_name=category.category_name) }}">
                                     <i class="fa fa-pencil"></i> Edit
                                 </a>
                             </td>
@@ -91,13 +91,14 @@
                     </tbody>
                 </table>
             </div>
-            {% else %}
+            {% else %} {{ utils.flashed_messages() }}
             <div style="text-align: center">
                 <h3> No categories have been added. </h3>
                 <hr class="intro-divider">
             </div>
             {% endif %}
         </div>
+
     </div>
 
 

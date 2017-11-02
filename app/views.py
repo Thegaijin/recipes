@@ -85,7 +85,14 @@ def signin():
     return render_template('login.html', form=form)
 
 
-@app.route('/categories', )
+@login_manager.user_loader
+def load_user(username):
+    """Loads user from the users dictionary"""
+    flash("In user loader")
+    return user.users.get(username)
+
+
+@app.route('/categories')
 def categories():
     return render_template('categories.html')
 

@@ -17,6 +17,11 @@ class User(UserMixin):
         self.hashed_pswd = hashed_pswd
         self.categories = {}
 
+    def get_id(self):
+        """Overriding the id parameter to be username"""
+
+        return self.username
+
     def create_category(self, category_name):
         ''' Creates the Category 
             Takes in one parameter, a string and creates an instance of the 

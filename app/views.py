@@ -117,14 +117,15 @@ def categories():
         all_categories = user.users[current_user.username].create_category(
             id, category_name)
         the_categories = list(all_categories.values())
+        print(the_categories)
         flash(all_categories)
         flash(type(all_categories))
         flash(the_categories)
-        return render_template('categories.html', form=form, action="Add",
+        return render_template('categories.html', form=form,
                                title="Categories", categories=the_categories)
     categories = user.users[current_user.username].categories
     the_categories = list(categories.values())
-    return render_template('categories.html', form=form, action="Add",
+    return render_template('categories.html', form=form,
                            title="Categories", categories=the_categories)
 
 

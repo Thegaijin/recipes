@@ -35,10 +35,10 @@ class User(UserMixin):
             raise TypeError('Input should be a string')
 
         if category_name not in self.categories:
-            new_category = Category(category_name)
+            new_category = Category(id, category_name)
             self.categories[category_name] = new_category
             return self.categories
-        return ""
+        return "A category by that name already exists"
 
     def view_category(self, category_name):
         ''' Displays a Category

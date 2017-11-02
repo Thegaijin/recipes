@@ -2,8 +2,10 @@
 
 
 class Category(object):
-    ''' Hold the details for categories '''
+    ''' The Category class is for creating category objects to hold
+    the properties of a category  '''
 
-    def __init__(self, category_name):
+    def __init__(self, id, category_name):
+        self.id = id
         self.category_name = category_name
         self.recipes = {}

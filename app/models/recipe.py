@@ -2,7 +2,9 @@
 
 
 class Recipe(object):
-    ''' Hold the details for categories '''
+    ''' The Recipe class is for creating recipe objects to hold
+    the properties of a recipe 
+    '''
 
     def __init__(self, recipe_name):
         self.recipe_name = recipe_name

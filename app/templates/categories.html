@@ -67,14 +67,8 @@
                         {% for category in categories %}
                         <tr>
                             <td> {{ category.category_name }} </td>
-<<<<<<< HEAD
-                            <td> {{ category.recipes.recipe_name }} </td>
-                            <!--  <td> z </td> -->
-=======
-
                             <td> {{ category.description }} </td>
 
->>>>>>> flask-v1.2
                             <td>
                                 <a href="{{url_for('view_category', category_name=category.category_name)}}">
                                     <i class="fa fa-pencil"></i> View

@@ -172,5 +172,5 @@ def delete_category(category_name):
         category_name)
     the_categories = list(all_categories.values())
 
-    return render_template('categories.html', title="Categories",
+    return render_template('categories.html', title="Categories", form=form,
                            categories=the_categories)

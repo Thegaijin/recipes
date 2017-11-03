@@ -22,7 +22,7 @@ class User(UserMixin):
 
         return self.username
 
-    def create_category(self, id, category_name):
+    def create_category(self, id, category_name, description):
         ''' Creates the Category 
             Takes in one parameter, a string and creates an instance of the 
             class category and adds it to the categories dictionary
@@ -34,8 +34,8 @@ class User(UserMixin):
         if not isinstance(category_name, str):
             raise TypeError('Input should be a string')
 
-        if category_name not in self.categories:
-            new_category = Category(id, category_name)
+        if description not in self.categories:
+            new_category = Category(id, category_name, description)
             self.categories[category_name] = new_category
             return self.categories
         return "A category by that name already exists"
@@ -48,21 +48,23 @@ class User(UserMixin):
             :param category_name: A string: the name of the category to view
             :return: The value of key that matches category name 
         '''
-        return self.categories[category_name].category_name
+        return self.categories[category_name]
 
-    def edit_category(self, category_name, new_category_name):
+    def edit_category(self, category_name, description='None'):
         ''' Editing a category
             Takes in two parameters, 2 strings and checks the categories 
-            dictionary for a key that matches the first string.Reassigns the 
-            value to the 2nd string as the key, deletes the first strings pair.
+            dictionary for a key that matches the first string.Edits the 
+            details.
 
             :param category_name: A string: the name of the category to edit
+            :param description: A string: Some details on the category
             :return: The dictionary categories
         '''
-        if category_name in self.categories:
-            self.categories[new_category_name] = self.categories[category_name]
-            del self.categories[category_name]
-            return self.categories
+        if description is None:
+            description = 'N/A'
+        updated_category = Category(id, category_name, description)
+        self.categories[category_name] = updated_category
+        return self.categories
 
     def delete_category(self, category_name):
         ''' Deleting a category
@@ -76,7 +78,7 @@ class User(UserMixin):
         del self.categories[category_name]
         return self.categories
 
-    def create_recipe(self, category_name, recipe_name):
+    def create_recipe(self, category_name, recipe_name, ingredients):
         ''' Creates recipes in a specified category.
             Takes in two parameters, checks categories dictionary for key
             category_name. Creates a class instance recipe_name of class Recipe
@@ -87,9 +89,20 @@ class User(UserMixin):
             :return: The list in the category instance
         '''
         the_category = self.categories[category_name]
-        new_recipe = Recipe(recipe_name)
+        new_recipe = Recipe(recipe_name, ingredients)
         the_category.recipes[recipe_name] = new_recipe
         return the_category.recipes
+
+    def view_recipes(self, category_name):
+        """ Views all the recipes
+        Takes in one parameter, category_name and returns the recipe dictionary
+
+        :param category_name: A string:
+        :return: The dictionary of recipes
+        """
+        all_recipes = self.categories[category_name].recipes
+        the_recipes = list(all_recipes.values())
+        return the_recipes
 
     def view_recipe(self, category_name, recipe_name):
         ''' Views a recipe 
@@ -110,16 +123,21 @@ class User(UserMixin):
         if recipe_name in the_recipes:
             return the_recipes[recipe_name].recipe_name
 
-    def edit_recipe(self, category_name, recipe_name, new_recipe_name):
+    def edit_recipe(self, category_name, recipe_name, ingredients='None'):
         ''' Edits a recipe '''
-        pass
+        the_recipes = self.categories[category_name].recipes
+        if recipe_name in the_recipes:
+            if ingredients is None:
+                ingredients = 'Please enter some Ingredients for the recipe'
+            updated_recipe = Recipe(recipe_name, ingredients)
+            the_recipes[recipe_name] = updated_recipe
+            return the_recipes
 
     def delete_recipe(self, category_name, recipe_name):
         ''' Deletes a recipe 
             Takes in two parameters, checks categories dictionary for key
             category_name. checks the recipes list in the category for the 
             recipe name. deletes the recipe
-
 
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe

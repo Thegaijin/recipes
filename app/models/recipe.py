@@ -6,6 +6,6 @@ class Recipe(object):
     the properties of a recipe 
     '''
 
-    def __init__(self, recipe_name):
+    def __init__(self, recipe_name, ingredients):
         self.recipe_name = recipe_name
-        self.ingredients = {}
+        self.ingredients = ingredients

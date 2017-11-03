@@ -5,7 +5,7 @@
         <nav>
             <ul class="menu">
                 <li>
-                    <a href="#">Sign Out</a>
+                    <a href="{{url_for('logout')}}">Sign Out</a>
                 </li>
                 <li>
                     <a>
@@ -19,7 +19,7 @@
 <section>
     {% block yummy %}
     <div class="cat-jumbo">
-        {{ utils.flashed_messages() }}
+
         <span id='cat-header'>
             <h3>{% block recipe %}Recipe categories {% endblock recipe %}</h3>
         </span>
@@ -58,7 +58,6 @@
                     <thead>
                         <tr>
                             <th width="15%"> Name </th>
-                            <th width="40%"> Recipes </th>
                             <th width="15%"> view recipes</th>
                             <th width="15%"> Edit </th>
                             <th width="15%"> Delete </th>
@@ -68,20 +67,26 @@
                         {% for category in categories %}
                         <tr>
                             <td> {{ category.category_name }} </td>
+<<<<<<< HEAD
                             <td> {{ category.recipes.recipe_name }} </td>
                             <!--  <td> z </td> -->
+=======
+
+                            <td> {{ category.description }} </td>
+
+>>>>>>> flask-v1.2
                             <td>
-                                <a href="">
+                                <a href="{{url_for('view_category', category_name=category.category_name)}}">
                                     <i class="fa fa-pencil"></i> View
                                 </a>
                             </td>
                             <td>
-                                <a href="">
+                                <a href="{{ url_for('edit_category', category_name=category.category_name) }}">
                                     <i class="fa fa-pencil"></i> Edit
                                 </a>
                             </td>
                             <td>
-                                <a href="">
+                                <a href="{{ url_for('delete_category', category_name=category.category_name) }}">
                                     <i class="fa fa-trash"></i> Delete
                                 </a>
                             </td>
@@ -90,13 +95,14 @@
                     </tbody>
                 </table>
             </div>
-            {% else %}
+            {% else %} {{ utils.flashed_messages() }}
             <div style="text-align: center">
                 <h3> No categories have been added. </h3>
                 <hr class="intro-divider">
             </div>
             {% endif %}
         </div>
+
     </div>
 
 

@@ -160,6 +160,23 @@ def edit_category(category_name):
                            action='edit_category', title="Edit Category")
 
 
+@app.route('/view_category/<category_name>', methods=['GET', 'POST'])
+@login_required
+def view_category(category_name):
+    """Renders the recipes template to display recipes in the category
+
+    :param category_name:
+    """
+
+    form = CreateForm()
+    the_category = user.users[current_user.username].view_category(
+        category_name)
+    the_recipes = the_category.recipes
+
+    return render_template('ingredients.html', title='Recipes', form=form,
+                           the_recipes=the_recipes, category=the_category)
+
+
 @app.route('/delete_category/<category_name>', methods=['GET', 'POST'])
 @login_required
 def delete_category(category_name):

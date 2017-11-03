@@ -71,7 +71,7 @@
                             <td> {{ category.description }} </td>
 
                             <td>
-                                <a href="">
+                                <a href="{{url_for('view_category', category_name=category.category_name)}}">
                                     <i class="fa fa-pencil"></i> View
                                 </a>
                             </td>

@@ -48,7 +48,7 @@ class User(UserMixin):
             :param category_name: A string: the name of the category to view
             :return: The value of key that matches category name 
         '''
-        return self.categories[category_name].category_name
+        return self.categories[category_name]
 
     def edit_category(self, category_name, description='None'):
         ''' Editing a category
@@ -78,7 +78,7 @@ class User(UserMixin):
         del self.categories[category_name]
         return self.categories
 
-    def create_recipe(self, category_name, recipe_name):
+    def create_recipe(self, category_name, recipe_name, ingredients):
         ''' Creates recipes in a specified category.
             Takes in two parameters, checks categories dictionary for key
             category_name. Creates a class instance recipe_name of class Recipe
@@ -89,7 +89,7 @@ class User(UserMixin):
             :return: The list in the category instance
         '''
         the_category = self.categories[category_name]
-        new_recipe = Recipe(recipe_name)
+        new_recipe = Recipe(recipe_name, ingredients)
         the_category.recipes[recipe_name] = new_recipe
         return the_category.recipes
 
@@ -112,16 +112,21 @@ class User(UserMixin):
         if recipe_name in the_recipes:
             return the_recipes[recipe_name].recipe_name
 
-    def edit_recipe(self, category_name, recipe_name, new_recipe_name):
+    def edit_recipe(self, category_name, recipe_name, ingredients='None'):
         ''' Edits a recipe '''
-        pass
+        the_recipes = self.categories[category_name].recipes
+        if recipe_name in the_recipes:
+            if ingredients is None:
+                ingredients = 'Please enter some Ingredients for the recipe'
+            updated_recipe = Recipe(recipe_name, ingredients)
+            the_recipes[recipe_name] = updated_recipe
+            return the_recipes
 
     def delete_recipe(self, category_name, recipe_name):
         ''' Deletes a recipe 
             Takes in two parameters, checks categories dictionary for key
             category_name. checks the recipes list in the category for the 
             recipe name. deletes the recipe
-
 
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe

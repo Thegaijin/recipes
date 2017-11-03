@@ -5,7 +5,7 @@
         <nav>
             <ul class="menu">
                 <li>
-                    <a href="#">Sign Out</a>
+                    <a href="{{url_for('logout')}}">Sign Out</a>
                 </li>
                 <li>
                     <a>
@@ -58,7 +58,6 @@
                     <thead>
                         <tr>
                             <th width="15%"> Name </th>
-                            <th width="40%"> Recipes </th>
                             <th width="15%"> view recipes</th>
                             <th width="15%"> Edit </th>
                             <th width="15%"> Delete </th>
@@ -69,7 +68,7 @@
                         <tr>
                             <td> {{ category.category_name }} </td>
 
-                            <td> {{ category.recipes.recipe_name }} </td>
+                            <td> {{ category.description }} </td>
 
                             <td>
                                 <a href="">
@@ -82,7 +81,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="">
+                                <a href="{{ url_for('delete_category', category_name=category.category_name) }}">
                                     <i class="fa fa-trash"></i> Delete
                                 </a>
                             </td>

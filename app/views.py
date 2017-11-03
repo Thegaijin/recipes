@@ -86,7 +86,7 @@ def logout():
     logout_user()
     flash('You have successfully been logged out.')
     # redirect to the login page
-    return redirect(url_for('login'))
+    return redirect(url_for('signin'))
 
 
 @login_manager.user_loader
@@ -102,7 +102,7 @@ def load_user(username):
 @app.route('/create_category',  methods=["GET", "POST"])
 @login_required
 def categories():
-    '''Renders the functionality of the categories route 
+    '''Renders the functionality of the categories route
 
     :param category_name:
     '''
@@ -167,20 +167,25 @@ def view_category(category_name):
 
     :param category_name:
     """
-
-    form = CreateForm()
     the_category = user.users[current_user.username].view_category(
         category_name)
-    the_recipes = the_category.recipes
-
-    return render_template('ingredients.html', title='Recipes', form=form,
-                           the_recipes=the_recipes, category=the_category)
+    form = CreateForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        ingredients = form.description.data
+        working_user = user.users[current_user.username]
+        all_recipes = working_user.create_recipe(
+            category_name, name, ingredients)
+    all_recipes = the_category.recipes
+    the_recipes = list(all_recipes.values())
+    return render_template('ingredients.html', form=form, title="Recipes",
+                           recipes=the_recipes, category=the_category)
 
 
 @app.route('/delete_category/<category_name>', methods=['GET', 'POST'])
 @login_required
 def delete_category(category_name):
-    """Enables the functionality on the delete_category route 
+    """Enables the functionality on the delete_category route
 
     :param category_name:
     """
@@ -191,3 +196,51 @@ def delete_category(category_name):
 
     return render_template('categories.html', title="Categories", form=form,
                            categories=the_categories)
+
+
+''' @app.route('/create_recipe/<category_name>/<recipe_name>',
+           methods=['GET', 'POST'])
+@login_required
+def create_recipe(category_name):
+    create_recipe = True
+    form = CreateForm()
+    if form.validate_on_submit():
+        category_name = form.name.data
+        ingredients = form.description.data
+
+    all_recipes = user.users[current_user.username].create_recipes(
+        recipe_name, ingredients)
+    the_recipes = list(all_recipes.values())
+    return redirect(url_for'ingredients.html', form=form,
+                           title="Recipes", recipes=the_recipes)
+
+    recipes = user.users[current_user.username].categories[category_name].recipes
+    the_recipes = list(recipes.values())
+    return render_template('ingredients.html', form=form,
+                           action='create_recipe',
+                           title="Recipes", recipes=the_recipes) '''
+
+
+@app.route('/delete_recipe/<category_name>/<recipe_name>',
+           methods=['GET', 'POST'])
+@login_required
+def view_recipe(category_name, recipe_name):
+    pass
+
+
+@app.route('/delete_recipe/<category_name>/<recipe_name>',
+           methods=['GET', 'POST'])
+@login_required
+def delete_recipe(category_name, recipe_name):
+    """Enables the functionality on the delete_category route
+
+    :param category_name: A string:
+    :param recipe_name: A string:
+    """
+    form = CreateForm()
+    all_recipes = user.users[current_user.username].delete_recipe(
+        recipe_name)
+    the_recipes = list(all_recipes.values())
+
+    return render_template('ingredients.html', title="Ingredients", form=form,
+                           recipes=the_recipes)

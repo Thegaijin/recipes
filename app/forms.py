@@ -56,4 +56,4 @@ class CreateForm(FlaskForm):
 
     name = StringField('Type here', validators=[DataRequired()])
     description = StringField('Type here', validators=[DataRequired()])
-    submit = SubmitField('Create/Edit Category')
+    submit = SubmitField('Create/Edit')

@@ -93,6 +93,17 @@ class User(UserMixin):
         the_category.recipes[recipe_name] = new_recipe
         return the_category.recipes
 
+    def view_recipes(self, category_name):
+        """ Views all the recipes
+        Takes in one parameter, category_name and returns the recipe dictionary
+
+        :param category_name: A string:
+        :return: The dictionary of recipes
+        """
+        all_recipes = self.categories[category_name].recipes
+        the_recipes = list(all_recipes.values())
+        return the_recipes
+
     def view_recipe(self, category_name, recipe_name):
         ''' Views a recipe 
             Takes in two parameters, checks categories dictionary for key

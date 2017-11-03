@@ -224,8 +224,23 @@ def create_recipe(category_name):
 @app.route('/delete_recipe/<category_name>/<recipe_name>',
            methods=['GET', 'POST'])
 @login_required
-def view_recipe(category_name, recipe_name):
-    pass
+def edit_recipe(category_name, recipe_name):
+    the_recipes = user.users[current_user.username].view_recipe(
+        category_name)
+    the_recipe = user.users[current_user.username].view_recipe(
+        category_name, recipe_name)
+    form = ItemForm(obj=the_recipe)
+    if form.validate_on_submit():
+        name = form.name.data
+        ingredients = form.description.data
+
+        edited_recipe = user.users[current_user.username].edit_recipe(
+            category_name, name, ingredients)
+        flash("Changes")
+        return redirect(url_for('view_category', category=category_name))
+    flash("Edit the {} recipe in the {} category".format(recipe, category_name))
+    return render_template('ingredients.html', title='Recipes', form=form,
+                           recipes=the_recipes, category=category_name)
 
 
 @app.route('/delete_recipe/<category_name>/<recipe_name>',
@@ -237,10 +252,12 @@ def delete_recipe(category_name, recipe_name):
     :param category_name: A string:
     :param recipe_name: A string:
     """
-    form = CreateForm()
+    the_category = user.users[current_user.username].view_category(
+        category_name)
     all_recipes = user.users[current_user.username].delete_recipe(
         recipe_name)
+    form = CreateForm()
     the_recipes = list(all_recipes.values())
 
     return render_template('ingredients.html', title="Ingredients", form=form,
-                           recipes=the_recipes)
+                           category=the_category, recipes=the_recipes)

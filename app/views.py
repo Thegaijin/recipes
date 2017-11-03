@@ -221,11 +221,11 @@ def create_recipe(category_name):
                            title="Recipes", recipes=the_recipes) '''
 
 
-@app.route('/delete_recipe/<category_name>/<recipe_name>',
+@app.route('/edit_recipe/<category_name>/<recipe_name>',
            methods=['GET', 'POST'])
 @login_required
 def edit_recipe(category_name, recipe_name):
-    the_recipes = user.users[current_user.username].view_recipe(
+    the_recipes = user.users[current_user.username].view_recipes(
         category_name)
     the_recipe = user.users[current_user.username].view_recipe(
         category_name, recipe_name)
@@ -239,7 +239,7 @@ def edit_recipe(category_name, recipe_name):
         flash("Changes")
         return redirect(url_for('view_category', category=category_name))
     flash("Edit the {} recipe in the {} category".format(recipe, category_name))
-    return render_template('ingredients.html', title='Recipes', form=form,
+    return render_template('ingredients.html', form=form, action='edit_recipe',
                            recipes=the_recipes, category=category_name)
 
 
@@ -260,4 +260,5 @@ def delete_recipe(category_name, recipe_name):
     the_recipes = list(all_recipes.values())
 
     return render_template('ingredients.html', title="Ingredients", form=form,
-                           category=the_category, recipes=the_recipes)
+                           action='delete_recipe', category=the_category,
+                           recipes=the_recipes)

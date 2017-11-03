@@ -22,7 +22,7 @@ class User(UserMixin):
 
         return self.username
 
-    def create_category(self, id, category_name):
+    def create_category(self, id, category_name, description):
         ''' Creates the Category 
             Takes in one parameter, a string and creates an instance of the 
             class category and adds it to the categories dictionary
@@ -34,8 +34,8 @@ class User(UserMixin):
         if not isinstance(category_name, str):
             raise TypeError('Input should be a string')
 
-        if category_name not in self.categories:
-            new_category = Category(id, category_name)
+        if description not in self.categories:
+            new_category = Category(id, category_name, description)
             self.categories[category_name] = new_category
             return self.categories
         return "A category by that name already exists"
@@ -50,19 +50,21 @@ class User(UserMixin):
         '''
         return self.categories[category_name].category_name
 
-    def edit_category(self, category_name, new_category_name):
+    def edit_category(self, category_name, description='None'):
         ''' Editing a category
             Takes in two parameters, 2 strings and checks the categories 
-            dictionary for a key that matches the first string.Reassigns the 
-            value to the 2nd string as the key, deletes the first strings pair.
+            dictionary for a key that matches the first string.Edits the 
+            details.
 
             :param category_name: A string: the name of the category to edit
+            :param description: A string: Some details on the category
             :return: The dictionary categories
         '''
-        if category_name in self.categories:
-            self.categories[new_category_name] = self.categories[category_name]
-            del self.categories[category_name]
-            return self.categories
+        if description is None:
+            description = 'N/A'
+        updated_category = Category(id, category_name, description)
+        self.categories[category_name] = updated_category
+        return self.categories
 
     def delete_category(self, category_name):
         ''' Deleting a category

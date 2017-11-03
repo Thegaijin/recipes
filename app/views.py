@@ -91,21 +91,27 @@ def logout():
 
 @login_manager.user_loader
 def load_user(username):
-    """Loads user from the users dictionary"""
-    flash("In user loader")
+    """Loads user from the users dictionary
+
+    :param username:
+    """
+
     return user.users.get(username)
 
 
 @app.route('/create_category',  methods=["GET", "POST"])
 @login_required
 def categories():
-    '''Renders the categories '''
+    '''Renders the functionality of the categories route 
+
+    :param category_name:
+    '''
 
     create_category = True
     form = CreateForm()
     if form.validate_on_submit():
         category_name = form.name.data
-        other = form.other.data
+        description = form.description.data
 
         if category_name not in user.users[current_user.username].categories:
             # creating a user id
@@ -114,7 +120,7 @@ def categories():
             id = len(user.users[current_user.username].categories) + 1
 
         all_categories = user.users[current_user.username].create_category(
-            id, category_name)
+            id, category_name, description)
         the_categories = list(all_categories.values())
         return render_template('categories.html', form=form,
                                title="Categories", categories=the_categories)
@@ -122,28 +128,49 @@ def categories():
     categories = user.users[current_user.username].categories
     the_categories = list(categories.values())
     return render_template('categories.html', form=form,
+                           action='create_category',
                            title="Categories", categories=the_categories)
 
 
 @app.route('/edit_category/<category_name>', methods=['GET', 'POST'])
 @login_required
 def edit_category(category_name):
-    """Enables the functionality on the /edit_category route"""
+    """Enables the functionality on the /edit_category route
 
+    :param category_name:
+    """
     create_category = False
+    edit_category = True
     the_category = user.users[current_user.username].view_category(
         category_name)
     form = CreateForm(obj=the_category)
     if form.validate_on_submit():
         name = form.name.data
-        other = form.other.data
+        description = form.description.data
 
         all_categories = user.users[current_user.username].edit_category(
-            name, other)
+            name, description)
         the_categories = list(all_categories.values())
 
         return render_template('categories.html', form=form,
                                title="Edit Category",
                                categories=the_categories)
-    flash("Edit the {} list".format(category_name))
-    return render_template('categories.html', form=form, title="Edit Category")
+    flash("Edit the {} category".format(category_name))
+    return render_template('categories.html', form=form,
+                           action='edit_category', title="Edit Category")
+
+
+@app.route('/delete_category/<category_name>', methods=['GET', 'POST'])
+@login_required
+def delete_category(category_name):
+    """Enables the functionality on the delete_category route 
+
+    :param category_name:
+    """
+    form = CreateForm()
+    all_categories = user.users[current_user.username].delete_category(
+        category_name)
+    the_categories = list(all_categories.values())
+
+    return render_template('categories.html', title="Categories",
+                           categories=the_categories)

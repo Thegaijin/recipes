@@ -1,7 +1,6 @@
 # app/tests/test_yummyapp.py
 
 # third party imports
-import pytest
 import unittest
 
 # local imports

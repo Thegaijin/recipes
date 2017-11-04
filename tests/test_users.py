@@ -1,7 +1,6 @@
 # app/tests/test_users.py
 
 # third party imports
-import pytest
 import unittest
 
 # local imports
@@ -51,12 +50,12 @@ class UserTestCase(unittest.TestCase):
             new_user.create_category('category_name') '''
 
     def test_user_if_category_doesnt_already_exist(self):
-        ''' Test if the category to be created does not already exist '''
+        ''' Test if the category to be created doesn\'t already exist '''
 
         self.the_user.create_category(1, "cakes", 'dough on dough on dough')
         assert "cakes" not in self.the_user.categories
 
-    def test_users_category_is_created(self):
+    def test_user_if_category_can_be_created(self):
         ''' Test if the category is created and added to the list '''
 
         ''' pre_length = len(new_user.categories)
@@ -67,35 +66,49 @@ class UserTestCase(unittest.TestCase):
         assert 'cakes' in new_user.categories '''
 
         self.the_user.create_category(1, "cakes", 'baked goods')
-        assertIn('cakes', self.the_user.categories,
-                 msg='The category was not added')
+        self.assertIn('cakes', self.the_user.categories,
+                      msg='The category was not added')
+
+    def test_user_if_category_can_be_viewed(self):
+        ''' Test if the category can be viewed '''
+
+        # user.create_category("cakes")
+        # assert new_user.view_category('cakes') == new_user.categories['cakes']
+        # FIXME: should return a key: value pair that matches the category name
+        self.the_user.create_category(1, "cakes", 'baked goods')
+        viewed = self.the_user.view_category("cakes")
+        self.assertEqual('cakes', viewed.category_name,
+                         msg='A category by that name doesn\'t exist')
+
+    def test_user_if_category_can_be_edited(self):
+        ''' Test if the category can be edited '''
+        # user.create_category("cakes")
+        # new_user.edit_category("cakes", "bakes")
+        # TODO: finish this
+        self.the_user.create_category(1, "cakes", 'baked goods')
+        edited = self.the_user.edit_category("cakes", 'dough on dough')
+        self.assertEqual('dough on dough',
+                         edited['cakes'].description,
+                         msg='The category description wasn\'t edited')
 
 
-def test_users_category_is_viewed(new_user, category):
-    ''' Test if the category can be viewed '''
-
-    # user.create_category("cakes")
-    assert new_user.view_category('cakes') == new_user.categories['cakes']
-    # FIXME: should return a key: value pair that matches the category name
-
-
-def test_if_user_category_can_be_edited(new_user, category):
-    ''' Test if the category can be edited '''
-    # user.create_category("cakes")
-    new_user.edit_category("cakes", "bakes")
-    # TODO: finish this
-
-
-def test_if_user_category_can_be_deleted(new_user, category):
+def test__user_if_category_can_be_deleted(self):
     ''' Test if categories can be deleted '''
-    pre_length = len(new_user.categories)
+
+    ''' pre_length = len(new_user.categories)
     new_user.delete_category("cakes")
     post_length = len(new_user.categories)
     x = pre_length - post_length
     assert x == 1
     result = new_user.delete_category("cakes")
     # assert "cakes" not in result
-    assert 'cakes' not in new_user.categories
+    assert 'cakes' not in new_user.categories '''
+
+    self.the_user.create_category(1, "cakes", 'baked goods')
+    deleted = self.the_user.delete_category("cakes")
+    self.assertFalse('cakes', deleted,
+                     msg='The category was not deleted')
+
 
 #######################################################################
 #                              RECIPE TESTS                           #

@@ -33,3 +33,10 @@ def test_yummyapp_if_user_already_exists(self):
     self.the_app.signup(self.the_user)
     potential_user = self.the_app.signup(self.new_user)
     self.assertFalse(potential_user, msg='That username already exists')
+
+
+def test_yummyapp_if_user_can_sign_up(self):
+    ''' Test if a user can sign up '''
+    self.the_app.signup(self.the_user)
+    self.assertIn(self.the_user.username, self.the_users,
+                  msg='The user was not able to sign up')

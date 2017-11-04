@@ -1,8 +1,8 @@
 # app/models/users.py
 
 # Local imports
-from app.models.category import Category
-from app.models.recipe import Recipe
+from .category import Category
+from .recipe import Recipe
 
 # Third party imports
 from flask_login import UserMixin
@@ -26,7 +26,6 @@ class User(UserMixin):
         ''' Creates the Category 
             Takes in one parameter, a string and creates an instance of the 
             class category and adds it to the categories dictionary
-
             :param category_name: A string: the name of the category to create
             :return: Categories dictionary, with the names as the keys and the 
             instance as the value
@@ -44,7 +43,6 @@ class User(UserMixin):
         ''' Displays a Category
             Takes in one parameter, a string and checks the categories 
             dictionary for a key that matches the string.
-
             :param category_name: A string: the name of the category to view
             :return: The value of key that matches category name 
         '''
@@ -55,7 +53,6 @@ class User(UserMixin):
             Takes in two parameters, 2 strings and checks the categories 
             dictionary for a key that matches the first string.Edits the 
             details.
-
             :param category_name: A string: the name of the category to edit
             :param description: A string: Some details on the category
             :return: The dictionary categories
@@ -70,7 +67,6 @@ class User(UserMixin):
         ''' Deleting a category
             Takes in one parameter, checks the categories dictionary for a key 
             that matches the first string. Deletes the key value pair.
-
             :param category_name: A string: the name of the category to delete
             :return: The remaining categories
         '''
@@ -83,7 +79,6 @@ class User(UserMixin):
             Takes in two parameters, checks categories dictionary for key
             category_name. Creates a class instance recipe_name of class Recipe
             then appends the recipe_name to category_name's value, a list.
-
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
             :return: The list in the category instance
@@ -95,10 +90,10 @@ class User(UserMixin):
 
     def view_recipes(self, category_name):
         """ Views all the recipes
-        Takes in one parameter, category_name and returns the recipe dictionary
-
+        Takes in one parameter, category_name and returns a list of the recipe 
+        dictionary values
         :param category_name: A string:
-        :return: The dictionary of recipes
+        :return: A list of the recipe dictionary values
         """
         all_recipes = self.categories[category_name].recipes
         the_recipes = list(all_recipes.values())
@@ -109,8 +104,6 @@ class User(UserMixin):
             Takes in two parameters, checks categories dictionary for key
             category_name. checks the recipes list in the category for the 
             recipe name
-
-
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
             :return: The list in the category instance
@@ -122,6 +115,7 @@ class User(UserMixin):
         ''' return recipe_name '''
         if recipe_name in the_recipes:
             return the_recipes[recipe_name].recipe_name
+        return 'A recipe by that name was not found in the category'
 
     def edit_recipe(self, category_name, recipe_name, ingredients='None'):
         ''' Edits a recipe '''
@@ -138,22 +132,12 @@ class User(UserMixin):
             Takes in two parameters, checks categories dictionary for key
             category_name. checks the recipes list in the category for the 
             recipe name. deletes the recipe
-
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
             :return: The list in the category instance
         '''
 
         del self.categories[category_name].recipes[recipe_name]
-        return self.categories[category_name].recipes
 
 
-# TESTING THE FUNCTIONALITY:
-''' new = User(1, 'username', 'password')
-print(new.create_category("Cakes"))
-print(new.create_recipe('Cakes', 'cupcake'))
-print(new.create_recipe('Cakes', 'bun'))
-print(new.create_recipe('Cakes', 'croissant'))
-print(new.view_recipe('Cakes', 'croissant'))
-print(new.delete_recipe('Cakes', 'croissant'))
- '''
+return self.categories[category_name].recipes

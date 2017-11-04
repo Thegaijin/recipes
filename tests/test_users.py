@@ -42,13 +42,6 @@ class UserTestCase(unittest.TestCase):
         self.assertIsInstance(self.the_user, User,
                               msg='Object should be instance of User class')
 
-    ''' @pytest.mark.parametrize('category_name', [1, [1, 2], 100.1, -5])
-    def test_users_category_error_if_argument_not_string(new_user, category_name):
-        Test if the parameter passed to a category is a string
-
-        with pytest.raises(TypeError):
-            new_user.create_category('category_name') '''
-
     def test_user_if_category_doesnt_already_exist(self):
         ''' Test if the category to be created doesn\'t already exist '''
 
@@ -58,13 +51,6 @@ class UserTestCase(unittest.TestCase):
     def test_user_if_category_can_be_created(self):
         ''' Test if the category is created and added to the list '''
 
-        ''' pre_length = len(new_user.categories)
-        # user.create_category("cakes")
-        post_length = len(new_user.categories)
-        x = post_length - pre_length
-        assert x == 1
-        assert 'cakes' in new_user.categories '''
-
         self.the_user.create_category(1, "cakes", 'baked goods')
         self.assertIn('cakes', self.the_user.categories,
                       msg='The category was not added')
@@ -72,9 +58,6 @@ class UserTestCase(unittest.TestCase):
     def test_user_if_category_can_be_viewed(self):
         ''' Test if the category can be viewed '''
 
-        # user.create_category("cakes")
-        # assert new_user.view_category('cakes') == new_user.categories['cakes']
-        # FIXME: should return a key: value pair that matches the category name
         self.the_user.create_category(1, "cakes", 'baked goods')
         viewed = self.the_user.view_category("cakes")
         self.assertEqual('cakes', viewed.category_name,
@@ -82,9 +65,7 @@ class UserTestCase(unittest.TestCase):
 
     def test_user_if_category_can_be_edited(self):
         ''' Test if the category can be edited '''
-        # user.create_category("cakes")
-        # new_user.edit_category("cakes", "bakes")
-        # TODO: finish this
+
         self.the_user.create_category(1, "cakes", 'baked goods')
         edited = self.the_user.edit_category("cakes", 'dough on dough')
         self.assertEqual('dough on dough',
@@ -94,15 +75,6 @@ class UserTestCase(unittest.TestCase):
 
 def test__user_if_category_can_be_deleted(self):
     ''' Test if categories can be deleted '''
-
-    ''' pre_length = len(new_user.categories)
-    new_user.delete_category("cakes")
-    post_length = len(new_user.categories)
-    x = pre_length - post_length
-    assert x == 1
-    result = new_user.delete_category("cakes")
-    # assert "cakes" not in result
-    assert 'cakes' not in new_user.categories '''
 
     self.the_user.create_category(1, "cakes", 'baked goods')
     deleted = self.the_user.delete_category("cakes")
@@ -115,22 +87,22 @@ def test__user_if_category_can_be_deleted(self):
 #######################################################################
 
 
-@pytest.mark.parametrize('recipe_name', [1, [1, 2], 100.1, -5])
+''' @pytest.mark.parametrize('recipe_name', [1, [1, 2], 100.1, -5])
 def test_users_recipe_error_if_not_string(new_user, category, recipe_name):
-    ''' Test if the parameter passed to a recipe is a string '''
+    Test if the parameter passed to a recipe is a string
     with pytest.raises(TypeError):
         new_user.create_recipe(category, 'recipe_name')
         # TODO: finish me or delete me
 
 
 def test_users_recipe_doesnt_already_exist(new_user):
-    ''' Test if the category to be created does not already exist '''
+    Test if the category to be created does not already exist
 
     new_user.create_recipe("cakes", "cupcakes", 'cakes in a cup')
     assert "cupcakes" not in new_user.categories['cakes']
 
 
-''' def test_if_users_recipe_is_created(new_user, category):
+ def test_if_users_recipe_is_created(new_user, category):
     Test if the recipe is created and added to the list
 
     pre_length = len(new_user.categories['cakes'])

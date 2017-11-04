@@ -99,7 +99,7 @@ class User(UserMixin):
         dictionary values
 
         :param category_name: A string:
-        :return: The list of the recipe dictionary values
+        :return: A list of the recipe dictionary values
         """
         all_recipes = self.categories[category_name].recipes
         the_recipes = list(all_recipes.values())

@@ -21,8 +21,8 @@ def new_user():
 @pytest.fixture(scope='module')
 def category():
     ''' Returns a category '''
-    category_a = User().create_category('bakes')
-    return category_a
+    the_category = User().create_category('bakes')
+    return the_category
 
 
 def test_users_is_instance(new_user):

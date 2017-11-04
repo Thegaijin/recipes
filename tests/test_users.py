@@ -1,7 +1,7 @@
 # app/tests/test_users.py
 
 # third party imports
-import pytest
+import unittest
 
 # local imports
 from app.models.users import User
@@ -10,20 +10,6 @@ from app.models.category import Category
 #######################################################################
 #                            CATEGORY TESTS                           #
 #######################################################################
-
-
-@pytest.fixture(scope='module')
-def new_user():
-    ''' Returns an instance of the User class '''
-    return User()
-
-
-@pytest.fixture(scope='module')
-def category():
-    ''' Returns a category '''
-    category_a = User().create_category('bakes')
-    return category_a
-
 
 ########################### REFACTOR TO UNITTEST  ##########################
 

@@ -95,10 +95,11 @@ class User(UserMixin):
 
     def view_recipes(self, category_name):
         """ Views all the recipes
-        Takes in one parameter, category_name and returns the recipe dictionary
+        Takes in one parameter, category_name and returns a list of the recipe 
+        dictionary values
 
         :param category_name: A string:
-        :return: The dictionary of recipes
+        :return: The list of the recipe dictionary values
         """
         all_recipes = self.categories[category_name].recipes
         the_recipes = list(all_recipes.values())
@@ -109,7 +110,6 @@ class User(UserMixin):
             Takes in two parameters, checks categories dictionary for key
             category_name. checks the recipes list in the category for the 
             recipe name
-
 
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
@@ -122,6 +122,7 @@ class User(UserMixin):
         ''' return recipe_name '''
         if recipe_name in the_recipes:
             return the_recipes[recipe_name].recipe_name
+        return 'A recipe by that name was not found in the category'
 
     def edit_recipe(self, category_name, recipe_name, ingredients='None'):
         ''' Edits a recipe '''
@@ -146,14 +147,3 @@ class User(UserMixin):
 
         del self.categories[category_name].recipes[recipe_name]
         return self.categories[category_name].recipes
-
-
-# TESTING THE FUNCTIONALITY:
-''' new = User(1, 'username', 'password')
-print(new.create_category("Cakes"))
-print(new.create_recipe('Cakes', 'cupcake'))
-print(new.create_recipe('Cakes', 'bun'))
-print(new.create_recipe('Cakes', 'croissant'))
-print(new.view_recipe('Cakes', 'croissant'))
-print(new.delete_recipe('Cakes', 'croissant'))
- '''

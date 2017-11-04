@@ -40,3 +40,12 @@ def test_yummyapp_if_user_can_sign_up(self):
     self.the_app.signup(self.the_user)
     self.assertIn(self.the_user.username, self.the_users,
                   msg='The user was not able to sign up')
+
+
+def test_yummyapp_if_user_can_sign_in(self):
+    ''' Test if existing user can sign in if their credentials match '''
+
+    self.the_app.signin(self.the_user)
+    self.the_app.signin('username', 'password')
+    self.assertEqual('password', self.the_users['username'].pswd_hash,
+                     msg='The entered credentials dont match')

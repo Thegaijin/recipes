@@ -25,8 +25,6 @@ class YummyApp(object):
         if isinstance(new_user, User):
             if new_user.username not in self.users:
                 self.users[new_user.username] = new_user
-                print("id: {}, username: {}, password: {}".format(
-                    new_user.id, new_user.username, new_user.hashed_pswd))
                 return True
             return False
         return 'User was not created'

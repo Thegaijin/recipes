@@ -1,7 +1,7 @@
 # app/tests/test_users.py
 
 # third party imports
-import unittest
+from unittest import TestCase
 
 # local imports
 from app.models.users import User
@@ -14,7 +14,7 @@ from app.models.category import Category
 ########################### REFACTOR TO UNITTEST  ##########################
 
 
-class UserTestCase(unittest.TestCase):
+class UserTestCase(TestCase):
     ''' Testing the functionality of the methods in the User Class '''
 
     def setUp(self):
@@ -30,9 +30,9 @@ class UserTestCase(unittest.TestCase):
 
     def test_user_if_category_doesnt_already_exist(self):
         ''' Test if the category to be created doesn\'t already exist '''
-
+        # FIXME: test gives assertion error
         self.the_user.create_category(1, "cakes", 'dough on dough on dough')
-        assert "cakes" not in self.the_user.categories
+        self.assertNotIn("cakes", self.the_user.categories)
 
     def test_user_if_category_can_be_created(self):
         ''' Test if the category is created and added to the list '''
@@ -58,52 +58,43 @@ class UserTestCase(unittest.TestCase):
                          edited['cakes'].description,
                          msg='The category description wasn\'t edited')
 
+    def test__user_if_category_can_be_deleted(self):
+        ''' Test if categories can be deleted '''
 
-def test__user_if_category_can_be_deleted(self):
-    ''' Test if categories can be deleted '''
-
-    self.the_user.create_category(1, "cakes", 'baked goods')
-    deleted = self.the_user.delete_category("cakes")
-    self.assertFalse('cakes', deleted,
-                     msg='The category was not deleted')
+        self.the_user.create_category(1, "cakes", 'baked goods')
+        deleted = self.the_user.delete_category("cakes")
+        self.assertNotIn('cakes', self.categories,
+                         msg='The category was not deleted')
 
 #######################################################################
 #                              RECIPE TESTS                           #
 #######################################################################
 
+    def test_if_users_recipe_is_created(self):
+        ''' Test if the recipe is created and added to the list '''
 
-@pytest.mark.parametrize('recipe_name', [1, [1, 2], 100.1, -5])
-def test_users_recipe_error_if_not_string(new_user, category, recipe_name):
-    ''' Test if the parameter passed to a recipe is a string '''
-    with pytest.raises(TypeError):
-        new_user.create_recipe(category, 'recipe_name')
-        # TODO: finish me or delete me
+        ''' pre_length = len(new_user.categories['cakes'])
+        new_user.create_recipe('cakes', 'cupcake')
+        post_length = len(new_user.categories['cakes'])
+        x = post_length - pre_length
+        assert x == 1
+        assert 'cupcakes' in new_user.categories['cakes'] '''
+        self.the_user.create_category(1, 'Cakes', 'baked goods')
+        self.the_user.create_recipe(
+            'Cakes', 'cupcakes', 'cakes in a cup')
+        self.assertIn('cupcakes', self.categories['Cakes'].recipes)
 
+    def test_if_users_recipes_is_viewed(self):
+        ''' Test if the recipe can be viewed '''
 
-def test_users_recipe_doesnt_already_exist(new_user):
-    ''' Test if the category to be created does not already exist '''
+        self.the_user.create_category(1, 'Cakes', 'baked goods')
+        self.the_user.create_recipe('Cakes', 'cupcakes', 'cakes in a cup')
+        viewed_recipe = self.the_user.view_recipe('Cakes', 'cupcakes')
+        self.assertEqual(
+            'cupcakes', viewed_recipe)
 
-    new_user.create_recipe("cakes", "cupcakes")
-    assert "cupcakes" not in new_user.categories['cakes']
-
-
-''' def test_if_users_recipe_is_created(new_user, category):
-    Test if the recipe is created and added to the list
-
-    pre_length = len(new_user.categories['cakes'])
-    new_user.create_recipe('cakes', 'cupcake')
-    post_length = len(new_user.categories['cakes'])
-    x = post_length - pre_length
-    assert x == 1
-    assert 'cupcakes' in new_user.categories['cakes']
-
-
-def test_if_users_recipes_is_viewed(new_user, category):
-    Test if the recipe can be viewed
-    viewed = new_user.view_recipe('cakes', 'cupcakes')
-    assert 'cupcakes' in new_user.categories['cakes']
-    # FIXME: Not clear, cross check in the morning
-
+        # FIXME: Not clear, cross check in the morning
+'''
 
 def test_users_edit_recipes(new_user, category):
     Test if the recipe can be edited 

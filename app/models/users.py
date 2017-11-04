@@ -118,7 +118,15 @@ class User(UserMixin):
         return 'A recipe by that name was not found in the category'
 
     def edit_recipe(self, category_name, recipe_name, ingredients='None'):
-        ''' Edits a recipe '''
+        ''' Edits a recipe
+            Takes in two parameters, checks categories dictionary for key
+            category_name. checks the recipes list in the category for the 
+            recipe name. replaces it's description with a new one.abs
+
+            :param category_name: A string: the name of the category
+            :param recipe_name: A string: the name of the recipe
+            :return: The dictionary of recipes
+         '''
         the_recipes = self.categories[category_name].recipes
         if recipe_name in the_recipes:
             if ingredients is None:
@@ -126,18 +134,18 @@ class User(UserMixin):
             updated_recipe = Recipe(recipe_name, ingredients)
             the_recipes[recipe_name] = updated_recipe
             return the_recipes
+        return 'The recipe doesn\'t exist'
 
     def delete_recipe(self, category_name, recipe_name):
-        ''' Deletes a recipe 
+        ''' Deletes a recipe. 
             Takes in two parameters, checks categories dictionary for key
             category_name. checks the recipes list in the category for the 
-            recipe name. deletes the recipe
+            recipe name. deletes the recipe.
+
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
             :return: The list in the category instance
         '''
 
         del self.categories[category_name].recipes[recipe_name]
-
-
-return self.categories[category_name].recipes
+        return self.categories[category_name].recipes

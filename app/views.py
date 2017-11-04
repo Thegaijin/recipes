@@ -38,7 +38,7 @@ def register():
             hashed_pswd = generate_password_hash(password)
 
             # creating instance of new_user
-            new_user = User(id, username, hashed_pswds)
+            new_user = User(id, username, hashed_pswd)
 
         # add employee to the users dictionary and return True if done
         created = user.signup(new_user)

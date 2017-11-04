@@ -47,5 +47,5 @@ def test_yummyapp_if_user_can_sign_in(self):
 
     self.the_app.signin(self.the_user)
     self.the_app.signin('username', 'password')
-    self.assertEqual('password', self.the_users['username'].pswd_hash,
+    self.assertEqual('password', self.the_users['username'].hashed_pswd,
                      msg='The entered credentials dont match')

@@ -2,6 +2,7 @@
 
 # third party imports
 import pytest
+import unittest
 
 # local imports
 from app.models.users import User
@@ -12,49 +13,62 @@ from app.models.category import Category
 #######################################################################
 
 
-@pytest.fixture(scope='module')
+''' @pytest.fixture(scope='module')
 def new_user():
-    ''' Returns an instance of the User class '''
-    return User()
+    Returns an instance of the User class
+    return User(1, 'username', 'password')
 
 
 @pytest.fixture(scope='module')
 def category():
-    ''' Returns a category '''
-    the_category = User().create_category('bakes')
-    return the_category
+    Returns a category
+    the_category = User(1, 'username', 'password').create_category(
+        1, 'bakes', 'baked goods')
+    return the_category '''
+
+########################### REFACTOR TO UNITTEST  ##########################
 
 
-def test_users_is_instance(new_user):
-    """Test if instance of User class is successfully created"""
+class UserTestCase(unittest.TestCase):
+    ''' Testing the functionality of the methods in the User Class '''
 
-    assert isinstance(new_user, User) is True
+    def setUp(self):
+        self.the_user = User(1, 'username', 'password')
+        self.categories = self.the_user.categories
 
+    def test_user_is_instance(self):
+        """Test if instance of User class is successfully created"""
 
-@pytest.mark.parametrize('category_name', [1, [1, 2], 100.1, -5])
-def test_users_category_error_if_argument_not_string(new_user, category_name):
-    ''' Test if the parameter passed to a category is a string '''
+        # assert isinstance(new_user, User) is True
+        self.assertIsInstance(self.the_user, User,
+                              msg='Object should be instance of User class')
 
-    with pytest.raises(TypeError):
-        new_user.create_category('category_name')
+    ''' @pytest.mark.parametrize('category_name', [1, [1, 2], 100.1, -5])
+    def test_users_category_error_if_argument_not_string(new_user, category_name):
+        Test if the parameter passed to a category is a string
 
+        with pytest.raises(TypeError):
+            new_user.create_category('category_name') '''
 
-def test_users_category_doesnt_already_exist(new_user):
-    ''' Test if the category to be created does not already exist '''
+    def test_user_if_category_doesnt_already_exist(self):
+        ''' Test if the category to be created does not already exist '''
 
-    new_user.create_category("cakes")
-    assert "cakes" not in new_user.categories
+        self.the_user.create_category(1, "cakes", 'dough on dough on dough')
+        assert "cakes" not in self.the_user.categories
 
+    def test_users_category_is_created(self):
+        ''' Test if the category is created and added to the list '''
 
-def test_users_category_is_created(new_user, category):
-    ''' Test if the category is created and added to the list '''
+        ''' pre_length = len(new_user.categories)
+        # user.create_category("cakes")
+        post_length = len(new_user.categories)
+        x = post_length - pre_length
+        assert x == 1
+        assert 'cakes' in new_user.categories '''
 
-    pre_length = len(new_user.categories)
-    # user.create_category("cakes")
-    post_length = len(new_user.categories)
-    x = post_length - pre_length
-    assert x == 1
-    assert 'cakes' in new_user.categories
+        self.the_user.create_category(1, "cakes", 'baked goods')
+        assertIn('cakes', self.the_user.categories,
+                 msg='The category was not added')
 
 
 def test_users_category_is_viewed(new_user, category):
@@ -99,7 +113,7 @@ def test_users_recipe_error_if_not_string(new_user, category, recipe_name):
 def test_users_recipe_doesnt_already_exist(new_user):
     ''' Test if the category to be created does not already exist '''
 
-    new_user.create_recipe("cakes", "cupcakes")
+    new_user.create_recipe("cakes", "cupcakes", 'cakes in a cup')
     assert "cupcakes" not in new_user.categories['cakes']
 
 

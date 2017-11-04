@@ -1,8 +1,8 @@
 # app/models/users.py
 
 # Local imports
-from app.models.category import Category
-from app.models.recipe import Recipe
+from .category import Category
+from .recipe import Recipe
 
 # Third party imports
 from flask_login import UserMixin

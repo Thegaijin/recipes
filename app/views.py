@@ -35,10 +35,10 @@ def register():
             id = len(user.users) + 1
 
             # hashing the password
-            pswd_hash = generate_password_hash(password)
+            hashed_pswd = generate_password_hash(password)
 
             # creating instance of new_user
-            new_user = User(id, username, pswd_hash)
+            new_user = User(id, username, hashed_pswds)
 
         # add employee to the users dictionary and return True if done
         created = user.signup(new_user)
@@ -114,7 +114,7 @@ def create_category():
         description = form.description.data
 
         if category_name not in user.users[current_user.username].categories:
-            # creating a user id
+            # creating a category id
             if len(user.users[current_user.username].categories) == 0:
                 id = 1
             id = len(user.users[current_user.username].categories) + 1

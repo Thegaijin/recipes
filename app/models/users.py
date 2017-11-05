@@ -30,6 +30,7 @@ class User(UserMixin):
             :return: Categories dictionary, with the names as the keys and the 
             instance as the value
         '''
+        
         if not isinstance(category_name, str):
             raise TypeError('Input should be a string')
 

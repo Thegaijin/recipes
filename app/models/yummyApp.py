@@ -31,12 +31,13 @@ class YummyApp(object):
 
     def signin(self, username, password):
         """Signs in existing users.
-        Takes in 2 parameters. Check is the username exists in users.Checks if the 
-        entered password matches the credentials saved with the username
+        Takes in 2 parameters. Check is the username exists in users.Checks if
+        the entered password matches the credentials saved with the username
 
         :param username: A string:
         :param password:
         """
+
         # check if username exists
         if username in self.users:
             # check if password matches the value of the username key
@@ -48,9 +49,10 @@ class YummyApp(object):
                         does not exist"
         return "The username does not exist, please signup"
 
-    def logout(self, username):
+    # Logout is handlded in the views, method is unnecessary
+    ''' def logout(self, username):
         """Signs out the currently logged in user
 
         :param username: A string:
         """
-        return "The user was logged out"
+        return "The user was logged out" '''

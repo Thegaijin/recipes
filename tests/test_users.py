@@ -11,7 +11,7 @@ from app.models.category import Category
 #                            CATEGORY TESTS                           #
 #######################################################################
 
-########################### REFACTOR TO UNITTEST  ##########################
+######################## REFACTOR TO UNITTEST  ########################
 
 
 class UserTestCase(TestCase):

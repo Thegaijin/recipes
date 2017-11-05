@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Thegaijin/recipes.svg?branch=flask-v1.2)](https://travis-ci.org/Thegaijin/recipes)
+
 # Recipes
 This application allows users to register an account and login to create, save and share recipes.
 

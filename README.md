@@ -38,12 +38,3 @@ To start the application run:
     set FLASK_CONFIG=development
     set FLASK_APP=run.py
     flask run
-
-
-
-
-
-
-
-
-

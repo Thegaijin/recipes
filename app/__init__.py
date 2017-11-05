@@ -7,9 +7,7 @@ from flask_login import LoginManager
 
 # local import
 # from config import app_config
-
 login_manager = LoginManager()
-
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object('config')
 

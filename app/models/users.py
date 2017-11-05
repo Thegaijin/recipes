@@ -1,8 +1,8 @@
 # app/models/users.py
 
 # Local imports
-from .category import Category
-from .recipe import Recipe
+from app.models.category import Category
+from app.models.recipe import Recipe
 
 # Third party imports
 from flask_login import UserMixin
@@ -30,7 +30,7 @@ class User(UserMixin):
             :return: Categories dictionary, with the names as the keys and the 
             instance as the value
         '''
-        
+
         if not isinstance(category_name, str):
             raise TypeError('Input should be a string')
 

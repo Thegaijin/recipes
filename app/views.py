@@ -109,14 +109,8 @@ def create_category():
         category_name = form.name.data
         description = form.description.data
 
-        if category_name not in user.users[current_user.username].categories:
-            # creating a category id
-            if len(user.users[current_user.username].categories) == 0:
-                id = 1
-            id = len(user.users[current_user.username].categories) + 1
-
         all_categories = user.users[current_user.username].create_category(
-            id, category_name, description)
+            category_name, description)
         the_categories = list(all_categories.values())
         return render_template('categories.html', form=form,
                                title="Categories", categories=the_categories)

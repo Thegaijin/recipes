@@ -22,7 +22,7 @@ class User(UserMixin):
 
         return self.username
 
-    def create_category(self, id, category_name, description):
+    def create_category(self, category_name, description):
         ''' Creates the Category 
             Takes in one parameter, a string and creates an instance of the 
             class category and adds it to the categories dictionary
@@ -35,7 +35,7 @@ class User(UserMixin):
             raise TypeError('Input should be a string')
 
         if description not in self.categories:
-            new_category = Category(id, category_name, description)
+            new_category = Category(category_name, description)
             self.categories[category_name] = new_category
             return self.categories
         return "A category by that name already exists"
@@ -128,6 +128,7 @@ class User(UserMixin):
             :param recipe_name: A string: the name of the recipe
             :return: The dictionary of recipes
          '''
+
         the_recipes = self.categories[category_name].recipes
         if recipe_name in the_recipes:
             if ingredients is None:

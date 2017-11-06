@@ -187,7 +187,7 @@ def edit_recipe(category_name, recipe_name):
         category_name)
     the_recipe = user.users[current_user.username].view_recipe(
         category_name, recipe_name)
-        
+              
     form = CreateForm(obj=the_recipe)
     if form.validate_on_submit():
         name = form.name.data
@@ -197,8 +197,9 @@ def edit_recipe(category_name, recipe_name):
             category_name, name, ingredients)
         the_recipes = list(all_recipes.values())
         return redirect(url_for('view_category', category_name=category_name))
-    ''' flash("Edit the {} recipe in the {} category".format(
-        recipe_name, category_name)) '''
+
+    flash("Edit the {} recipe in the {} category".format(
+        recipe_name, category_name))
     return render_template('ingredients.html', form=form, title='Ingredients',
                            category_name=category_name, recipes=the_recipes)
 
@@ -211,6 +212,7 @@ def delete_recipe(category_name, recipe_name):
     :param category_name: A string:
     :param recipe_name: A string:
     """
+
     all_recipes = user.users[current_user.username].delete_recipe(category_name,
                                                                   recipe_name)
     the_recipes = list(all_recipes.values())

@@ -60,7 +60,7 @@ class User(UserMixin):
         '''
         if description is None:
             description = 'N/A'
-        updated_category = Category(id, category_name, description)
+        updated_category = Category(category_name, description)
         self.categories[category_name] = updated_category
         return self.categories
 

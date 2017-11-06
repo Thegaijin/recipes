@@ -82,7 +82,7 @@ class User(UserMixin):
             then appends the recipe_name to category_name's value, a list.
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
-            :return: The list in the category instance
+            :return: The dictionary of recipes in the category instance
         '''
         the_category = self.categories[category_name]
         new_recipe = Recipe(recipe_name, ingredients)

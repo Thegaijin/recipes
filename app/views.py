@@ -29,16 +29,12 @@ def register():
         password = form.password.data
 
         if username not in user.users:
-            # creating a user id
-            if len(user.users) == 0:
-                id = 1
-            id = len(user.users) + 1
 
             # hashing the password
             hashed_pswd = generate_password_hash(password)
 
             # creating instance of new_user
-            new_user = User(id, username, hashed_pswd)
+            new_user = User(username, hashed_pswd)
 
         # add employee to the users dictionary and return True if done
         created = user.signup(new_user)
@@ -103,7 +99,6 @@ def create_category():
     :param category_name:
     '''
 
-    create_category = True
     form = CreateForm()
     if form.validate_on_submit():
         category_name = form.name.data
@@ -118,7 +113,6 @@ def create_category():
     categories = user.users[current_user.username].categories
     the_categories = list(categories.values())
     return render_template('categories.html', form=form,
-                           action='create_category',
                            title="Categories", categories=the_categories)
 
 
@@ -128,8 +122,7 @@ def edit_category(category_name):
     """Enables the functionality on the /edit_category route
     :param category_name:
     """
-    create_category = False
-    edit_category = True
+
     all_categories = user.users[current_user.username].categories
     the_category = user.users[current_user.username].view_category(
         category_name)
@@ -147,8 +140,7 @@ def edit_category(category_name):
                                title="Edit Category",
                                categories=the_categories)
     flash("Edit the {} category".format(category_name))
-    return render_template('categories.html', form=form,
-                           action='edit_category', title="Edit Category")
+    return render_template('categories.html', form=form, title="Edit Category")
 
 
 @app.route('/view_category/<category_name>', methods=['GET', 'POST'])
@@ -203,7 +195,7 @@ def edit_recipe(category_name, recipe_name):
 
         all_recipes = user.users[current_user.username].edit_recipe(
             category_name, name, ingredients)
-        the_recipes = list(all_recipes.values)
+        the_recipes = list(all_recipes.values())
         return redirect(url_for('view_category', category_name=category_name))
     ''' flash("Edit the {} recipe in the {} category".format(
         recipe_name, category_name)) '''

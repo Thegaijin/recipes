@@ -37,14 +37,14 @@ class UserTestCase(TestCase):
     def test_user_if_category_can_be_created(self):
         ''' Test if the category is created and added to the list '''
 
-        self.the_user.create_category(1, "cakes", 'baked goods')
+        self.the_user.create_category("cakes", 'baked goods')
         self.assertIn('cakes', self.the_user.categories,
                       msg='The category was not added')
 
     def test_user_if_category_can_be_viewed(self):
         ''' Test if the category can be viewed '''
 
-        self.the_user.create_category(1, "cakes", 'baked goods')
+        self.the_user.create_category("cakes", 'baked goods')
         viewed = self.the_user.view_category("cakes")
         self.assertEqual('cakes', viewed.category_name,
                          msg='A category by that name doesn\'t exist')
@@ -52,7 +52,7 @@ class UserTestCase(TestCase):
     def test_user_if_category_can_be_edited(self):
         ''' Test if the category can be edited '''
 
-        self.the_user.create_category(1, "cakes", 'baked goods')
+        self.the_user.create_category("cakes", 'baked goods')
         edited = self.the_user.edit_category("cakes", 'dough on dough')
         self.assertEqual('dough on dough',
                          self.categories['cakes'].description,
@@ -61,7 +61,7 @@ class UserTestCase(TestCase):
     def test__user_if_category_can_be_deleted(self):
         ''' Test if categories can be deleted '''
 
-        self.the_user.create_category(1, "cakes", 'baked goods')
+        self.the_user.create_category("cakes", 'baked goods')
         deleted = self.the_user.delete_category("cakes")
         self.assertNotIn('cakes', self.categories,
                          msg='The category was not deleted')
@@ -79,7 +79,7 @@ class UserTestCase(TestCase):
         x = post_length - pre_length
         assert x == 1
         assert 'cupcakes' in new_user.categories['cakes'] '''
-        self.the_user.create_category(1, 'Cakes', 'baked goods')
+        self.the_user.create_category('Cakes', 'baked goods')
         self.the_user.create_recipe(
             'Cakes', 'cupcakes', 'cakes in a cup')
         self.assertIn('cupcakes', self.categories['Cakes'].recipes)
@@ -87,7 +87,7 @@ class UserTestCase(TestCase):
     def test_users_if_recipe_is_viewed(self):
         ''' Test if the recipe can be viewed '''
 
-        self.the_user.create_category(1, 'Cakes', 'baked goods')
+        self.the_user.create_category('Cakes', 'baked goods')
         self.the_user.create_recipe('Cakes', 'cupcakes', 'cakes in a cup')
         viewed_recipe = self.the_user.view_recipe('Cakes', 'cupcakes')
         self.assertEqual(
@@ -96,7 +96,7 @@ class UserTestCase(TestCase):
     def test_usersif_recipe_can_be_edited(self):
         ''' Test if the recipe can be edited '''
 
-        self.the_user.create_category(1, 'Cakes', 'baked goods')
+        self.the_user.create_category('Cakes', 'baked goods')
         self.the_user.create_recipe('Cakes', 'cupcakes', 'cakes in a cup')
         self.the_user.edit_recipe('Cakes', 'cupcakes', 'dough on dough')
         self.assertEqual(
@@ -106,13 +106,7 @@ class UserTestCase(TestCase):
     def test_user_can_delete_recipe(self):
         ''' Test if a recipe can be deleted from a category  '''
 
-        '''pre_length = len(new_user.categories['cakes'])
-            new_user.delete_recipe("cakes", "cupcakes")
-            post_length = len(new_user.categories['cakes'])
-            x = pre_length - post_length
-            assert x == 1
-            assert 'cupcakes' not in new_user.categories['cakes'] '''
-        self.the_user.create_category(1, 'Cakes', 'baked goods')
+        self.the_user.create_category('Cakes', 'baked goods')
         self.the_user.create_recipe('Cakes', 'cupcakes', 'cakes in a cup')
         self.the_user.delete_recipe('Cakes', 'cupcakes')
         self.assertNotIn('cupcakes', self.categories['Cakes'].recipes)

@@ -14,7 +14,7 @@ class YummpyAppTestCase(unittest.TestCase):
     def setUp(self):
         self.the_app = YummyApp()
         self.the_users = self.the_app.users
-        self.the_user = User(1, 'username', 'password')
+        self.the_user = User('username', 'password')
 
     def test_yummyapp_if_instance(self):
         ''' Test if an instance of YummyApp is created '''
@@ -25,7 +25,7 @@ class YummpyAppTestCase(unittest.TestCase):
     def test_yummyapp_if_user_already_exists(self):
         ''' Test if a username is already taken '''
 
-        self.new_user = User(2, 'username', 'password')
+        self.new_user = User('username', 'password')
         self.the_app.signup(self.the_user)
         potential_user = self.the_app.signup(self.new_user)
         self.assertFalse(potential_user, msg='That username already exists')

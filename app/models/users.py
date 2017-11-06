@@ -11,8 +11,7 @@ from flask_login import UserMixin
 class User(UserMixin):
     ''' Creates and manipulates categories and recipes '''
 
-    def __init__(self, id, username, hashed_pswd):
-        self.id = id
+    def __init__(self, username, hashed_pswd):
         self.username = username
         self.hashed_pswd = hashed_pswd
         self.categories = {}

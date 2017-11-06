@@ -18,7 +18,7 @@ class UserTestCase(TestCase):
     ''' Testing the functionality of the methods in the User Class '''
 
     def setUp(self):
-        self.the_user = User(1, 'username', 'password')
+        self.the_user = User( 'username', 'password')
         self.categories = self.the_user.categories
 
     def test_user_is_instance(self):

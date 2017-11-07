@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/Thegaijin/recipes.svg?branch=flask-v1.2)](https://travis-ci.org/Thegaijin/recipes)
 [![Coverage Status](https://coveralls.io/repos/github/Thegaijin/recipes/badge.svg?branch=flask-v1.2)](https://coveralls.io/github/Thegaijin/recipes?branch=flask-v1.2)
+[![Maintainability](https://api.codeclimate.com/v1/badges/93d760f922717f383077/maintainability)](https://codeclimate.com/github/Thegaijin/recipes/maintainability)
 
 
 # Recipes

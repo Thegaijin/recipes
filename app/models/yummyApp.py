@@ -5,7 +5,7 @@ from app.models.users import User
 
 # Third party imports
 from flask_login import logout_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
 
 
 class YummyApp(object):

@@ -1,14 +1,14 @@
 # app/tests/test_yummyapp.py
 
 # third party imports
-import unittest
+from unittest import TestCase
 
 # local imports
 from app.models.yummyApp import YummyApp
 from app.models.users import User
 
 
-class YummpyAppTestCase(unittest.TestCase):
+class YummpyAppTestCase(TestCase):
     '''Testing the methods in the YummyApp class  '''
 
     def setUp(self):

@@ -187,7 +187,7 @@ def edit_recipe(category_name, recipe_name):
         category_name)
     the_recipe = user.users[current_user.username].view_recipe(
         category_name, recipe_name)
-              
+
     form = CreateForm(obj=the_recipe)
     if form.validate_on_submit():
         name = form.name.data

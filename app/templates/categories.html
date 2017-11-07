@@ -9,7 +9,7 @@
                 </li>
                 <li>
                     <a>
-                        <i class="fa fa-user"></i> Hi, username</a>
+                        <i class="fa fa-user"></i> Hi, {{current_user.username}}</a>
                 </li>
             </ul>
         </nav>
@@ -58,6 +58,7 @@
                     <thead>
                         <tr>
                             <th width="15%"> Name </th>
+                            <th width="40%"> Description</th>
                             <th width="15%"> view recipes</th>
                             <th width="15%"> Edit </th>
                             <th width="15%"> Delete </th>

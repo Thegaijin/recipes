@@ -2,9 +2,10 @@
 # Third party import
 
 SECRET_KEY = "x7êr(9rty%$$#NV^h_=+4"
+DEBUG = True
 
 
-class Config(object):
+''' class Config(object):
     """Parent configuration class."""
     DEBUG = False
 
@@ -23,4 +24,4 @@ class ProductionConfig(Config):
 app_config = {
     'development': DevelopmentConfig,
     'production': ProductionConfig
-}
+} '''

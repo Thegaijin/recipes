@@ -7,17 +7,15 @@ from flask_login import LoginManager
 
 # local import
 # from config import app_config
-
 login_manager = LoginManager()
-
 app = Flask(__name__, instance_relative_config=True)
-app.config.from_object('config')
+app.config.from_object('config')        # Load external config file
 
 Bootstrap(app)
 
 
 # For user session management and remember the users’ session
-login_manager.init_app(app)
+login_manager.init_app(app)     # initialise login manager
 login_manager.login_message = "You must be logged in to access this page."
 login_manager.login_view = "login"
 

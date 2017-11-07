@@ -8,8 +8,8 @@ from app.models.yummyApp import YummyApp
 # Third party imports
 from flask import flash
 from flask_wtf import FlaskForm
-from wtforms import (validators, StringField,
-                     SubmitField, PasswordField, ValidationError)
+from wtforms import (validators, StringField, SubmitField,
+                     PasswordField, ValidationError)
 from wtforms.validators import DataRequired, EqualTo
 
 user = YummyApp()

@@ -214,6 +214,6 @@ def delete_recipe(category_name, recipe_name):
                                                                   recipe_name)
     the_recipes = list(all_recipes.values())
     form = CreateForm()
-
-    return render_template('ingredients.html', title="Ingredients", form=form,
-                           category_name=category_name, recipes=the_recipes)
+    return redirect(url_for('view_category', category_name=category_name))
+    ''' return render_template('ingredients.html', title="Ingredients", form=form,
+                           category_name=category_name, recipes=the_recipes) '''

@@ -9,10 +9,9 @@ from .forms import RegisterForm, LoginForm, CreateForm
 
 
 # Third party imports
-from flask import render_template
-from flask import (flash, redirect, render_template, request, url_for)
+from flask import (flash, redirect, render_template, url_for)
 from flask_login import login_required, login_user, logout_user, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 
 
 user = YummyApp()
@@ -132,7 +131,7 @@ def edit_category(category_name):
         description = form.description.data
 
         all_categories = user.users[current_user.username].edit_category(
-            name, description)
+            category_name, name, description)
         the_categories = list(all_categories.values())
 
         return render_template('categories.html', form=form,

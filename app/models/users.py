@@ -1,11 +1,12 @@
 # app/models/users.py
 
+# Third party imports
+from flask_login import UserMixin
+
+
 # Local imports
 from .category import Category
 from .recipe import Recipe
-
-# Third party imports
-from flask_login import UserMixin
 
 
 class User(UserMixin):
@@ -33,7 +34,7 @@ class User(UserMixin):
         if not isinstance(category_name, str):
             raise TypeError('Input should be a string')
 
-        if description not in self.categories:
+        if category_name not in self.categories:
             new_category = Category(category_name, description)
             self.categories[category_name] = new_category
             return self.categories
@@ -48,7 +49,7 @@ class User(UserMixin):
         '''
         return self.categories[category_name]
 
-    def edit_category(self, category_name, description='None'):
+    def edit_category(self, category_name, new_category_name, description='None'):
         ''' Editing a category
             Takes in two parameters, 2 strings and checks the categories 
             dictionary for a key that matches the first string.Edits the 
@@ -57,11 +58,21 @@ class User(UserMixin):
             :param description: A string: Some details on the category
             :return: The dictionary categories
         '''
-        if description is None:
+        ''' if description is None:
             description = 'N/A'
         updated_category = Category(category_name, description)
         self.categories[category_name] = updated_category
-        return self.categories
+        return self.categories '''
+
+        # updating just the description
+        if new_category_name in self.categories:
+            updated_category = Category(new_category_name, description)
+            self.categories[category_name] = updated_category
+            return self.categories
+        else:
+            self.categories[new_category_name] = self.categories.pop(
+                category_name)
+            return self.categories
 
     def delete_category(self, category_name):
         ''' Deleting a category

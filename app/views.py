@@ -212,13 +212,14 @@ def edit_recipe(category_name, recipe_name):
             user.users[current_user.username].edit_recipe(
                 category_name, name, ingredients)
 
-            flash("Edit the {} recipe in the {} category".format(
-                recipe_name, category_name))
+            ''' flash("Edit the {} recipe in the {} category".format(
+                recipe_name, category_name)) '''
             return render_template('ingredients.html', form=form,
                                    title='Ingredients',
                                    category_name=category_name,
                                    recipes=the_recipes)
-
+    flash("Edit the {} recipe in the {} category".format(
+        recipe_name, category_name))
     return render_template('ingredients.html', form=form,
                            title='Ingredients',
                            category_name=category_name)

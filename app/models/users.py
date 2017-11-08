@@ -23,11 +23,11 @@ class User(UserMixin):
         return self.username
 
     def create_category(self, category_name, description):
-        ''' Creates the Category 
-            Takes in one parameter, a string and creates an instance of the 
+        ''' Creates the Category
+            Takes in one parameter, a string and creates an instance of the
             class category and adds it to the categories dictionary
             :param category_name: A string: the name of the category to create
-            :return: Categories dictionary, with the names as the keys and the 
+            :return: Categories dictionary, with the names as the keys and the
             instance as the value
         '''
 
@@ -42,17 +42,17 @@ class User(UserMixin):
 
     def view_category(self, category_name):
         ''' Displays a Category
-            Takes in one parameter, a string and checks the categories 
+            Takes in one parameter, a string and checks the categories
             dictionary for a key that matches the string.
             :param category_name: A string: the name of the category to view
-            :return: The value of key that matches category name 
+            :return: The value of key that matches category name
         '''
         return self.categories[category_name]
 
-    def edit_category(self, category_name, new_category_name, description='None'):
+    def edit_category(self, category_name, description):
         ''' Editing a category
-            Takes in two parameters, 2 strings and checks the categories 
-            dictionary for a key that matches the first string.Edits the 
+            Takes in two parameters, 2 strings and checks the categories
+            dictionary for a key that matches the first string.Edits the
             details.
             :param category_name: A string: the name of the category to edit
             :param description: A string: Some details on the category
@@ -66,17 +66,21 @@ class User(UserMixin):
 
         # updating just the description
         if new_category_name in self.categories:
-            updated_category = Category(new_category_name, description)
+            updated_category = Category(category_name, description)
             self.categories[category_name] = updated_category
-            return self.categories
-        else:
-            self.categories[new_category_name] = self.categories.pop(
+            ''' return self.categories '''
+        ''' else:
+            create_category(new_category_name, description)
+            del self.categories[category_name]
+                self.categories[new_category_name] = self.categories.pop(
                 category_name)
-            return self.categories
+                self.categories[new_category_name] = self.categories[category_name]
+            del self.categories[category_name]
+                return self.categories '''
 
     def delete_category(self, category_name):
         ''' Deleting a category
-            Takes in one parameter, checks the categories dictionary for a key 
+            Takes in one parameter, checks the categories dictionary for a key
             that matches the first string. Deletes the key value pair.
             :param category_name: A string: the name of the category to delete
             :return: The remaining categories
@@ -101,19 +105,18 @@ class User(UserMixin):
 
     def view_recipes(self, category_name):
         """ Views all the recipes
-        Takes in one parameter, category_name and returns a list of the recipe 
+        Takes in one parameter, category_name and returns a list of the recipe
         dictionary values
         :param category_name: A string:
         :return: A list of the recipe dictionary values
         """
         all_recipes = self.categories[category_name].recipes
-        the_recipes = list(all_recipes.values())
-        return the_recipes
+        return all_recipes
 
     def view_recipe(self, category_name, recipe_name):
-        ''' Views a recipe 
+        ''' Views a recipe
             Takes in two parameters, checks categories dictionary for key
-            category_name. checks the recipes list in the category for the 
+            category_name. checks the recipes list in the category for the
             recipe name
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
@@ -128,25 +131,28 @@ class User(UserMixin):
             return the_recipes[recipe_name].recipe_name
         return 'A recipe by that name was not found in the category'
 
-    def edit_recipe(self, category_name, recipe_name, ingredients='None'):
+    def edit_recipe(self, category_name, recipe_name,
+                    ingredients='None'):
         ''' Edits a recipe
             Takes in two parameters, checks categories dictionary for key
-            category_name. checks the recipes list in the category for the 
+            category_name. checks the recipes list in the category for the
             recipe name. replaces it's description with a new one.abs
 
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
             :return: The dictionary of recipes
-         '''
+        '''
 
         the_recipes = self.categories[category_name].recipes
-        if recipe_name in the_recipes:
-            if ingredients is None:
+        updated_recipe = Recipe(category_name, ingredients)
+        the_recipes[recipe_name] = updated_recipe
+        ''' if ingredients is None:
                 ingredients = 'Please enter some Ingredients for the recipe'
-            updated_recipe = Recipe(recipe_name, ingredients)
-            the_recipes[recipe_name] = updated_recipe
-            return the_recipes
-        return 'The recipe doesn\'t exist'
+                updated_recipe = Recipe(recipe_name, ingredients)
+                the_recipes[recipe_name] = updated_recipe
+                return the_recipes 
+
+        return 'The recipe doesn\'t exist'''
 
     def delete_recipe(self, category_name, recipe_name):
         ''' Deletes a recipe. 

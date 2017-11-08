@@ -65,10 +65,9 @@ class User(UserMixin):
         return self.categories '''
 
         # updating just the description
-        if new_category_name in self.categories:
-            updated_category = Category(category_name, description)
-            self.categories[category_name] = updated_category
-            ''' return self.categories '''
+        updated_category = Category(category_name, description)
+        self.categories[category_name] = updated_category
+        ''' return self.categories '''
         ''' else:
             create_category(new_category_name, description)
             del self.categories[category_name]
@@ -132,7 +131,7 @@ class User(UserMixin):
         return 'A recipe by that name was not found in the category'
 
     def edit_recipe(self, category_name, recipe_name,
-                    ingredients='None'):
+                    ingredients):
         ''' Edits a recipe
             Takes in two parameters, checks categories dictionary for key
             category_name. checks the recipes list in the category for the
@@ -146,13 +145,6 @@ class User(UserMixin):
         the_recipes = self.categories[category_name].recipes
         updated_recipe = Recipe(category_name, ingredients)
         the_recipes[recipe_name] = updated_recipe
-        ''' if ingredients is None:
-                ingredients = 'Please enter some Ingredients for the recipe'
-                updated_recipe = Recipe(recipe_name, ingredients)
-                the_recipes[recipe_name] = updated_recipe
-                return the_recipes 
-
-        return 'The recipe doesn\'t exist'''
 
     def delete_recipe(self, category_name, recipe_name):
         ''' Deletes a recipe. 

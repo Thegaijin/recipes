@@ -198,24 +198,16 @@ def edit_recipe(category_name, recipe_name):
         name = form.name.data
         ingredients = form.description.data
 
-        if name not in the_recipes:
+        if name not in all_recipes:
             del all_recipes[recipe_name]
             the_recipes = user.users[current_user.username].create_recipe(
-                category_name, description)
-            my_recipes = list(the_recipes.values())
-            return render_template('ingredients.html', form=form,
-                                   title="The recipes",
-                                   category_name=category_name,
-                                   recipes=my_recipes)
-        else:
-            user.users[current_user.username].edit_category(
-                category_name, name, description)
-
-            '''  all_recipes = user.users[current_user.username].edit_recipe(
                 category_name, name, ingredients)
-            the_recipes = list(all_recipes.values())
-            return redirect(url_for('view_category', 
-            category_name=category_name)) '''
+            my_recipes = list(the_recipes.values())
+            return redirect(url_for('view_category',
+                                    category_name=category_name))
+        else:
+            user.users[current_user.username].edit_recipe(
+                category_name, name, ingredients)
 
             flash("Edit the {} recipe in the {} category".format(
                 recipe_name, category_name))
@@ -223,6 +215,10 @@ def edit_recipe(category_name, recipe_name):
                                    title='Ingredients',
                                    category_name=category_name,
                                    recipes=the_recipes)
+
+    return render_template('ingredients.html', form=form,
+                           title='Ingredients',
+                           category_name=category_name)
 
 
 @app.route('/delete_recipe/<category_name>/<recipe_name>',
@@ -238,5 +234,3 @@ def delete_recipe(category_name, recipe_name):
     the_recipes = list(all_recipes.values())
     form = CreateForm()
     return redirect(url_for('view_category', category_name=category_name))
-    ''' return render_template('ingredients.html', title="Ingredients", form=form,
-                           category_name=category_name, recipes=the_recipes) '''

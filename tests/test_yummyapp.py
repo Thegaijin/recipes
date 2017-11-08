@@ -45,6 +45,3 @@ class YummpyAppTestCase(TestCase):
         self.assertEqual('password', self.the_users['username'].hashed_pswd,
                          msg='The username and password combination does not \
                         exist')
-
-    def test_yummyapp_if_user_can_logout(self):
-        pass

@@ -74,6 +74,7 @@ def signin():
 @login_required
 def logout():
     """Handle requests to the /logout route
+
     Log users out of the app
     """
     logout_user()
@@ -85,6 +86,7 @@ def logout():
 @login_manager.user_loader
 def load_user(username):
     """Loads user from the users dictionary
+
     :param username:
     """
 
@@ -120,6 +122,7 @@ def create_category():
 @login_required
 def edit_category(category_name):
     """Enables the functionality on the /edit_category route
+
     :param category_name:
     """
 
@@ -139,9 +142,7 @@ def edit_category(category_name):
                 name, description)
             the_categories = list(all_categories.values())
             return redirect(url_for('create_category'))
-            ''' return render_template('categories.html', form=form,
-                                   title="The Categories",
-                                   categories=the_categories) '''
+
         else:
             user.users[current_user.username].edit_category(
                 category_name, name, description)
@@ -192,6 +193,11 @@ def delete_category(category_name):
            methods=['GET', 'POST'])
 @login_required
 def edit_recipe(category_name, recipe_name):
+    """Renders the recipe template to edit recipes in the category
+
+    :param category_name: A string:
+    :param recipe_name: A string:
+    """
     all_recipes = user.users[current_user.username].view_recipes(
         category_name)
     the_recipe = user.users[current_user.username].view_recipe(
@@ -212,8 +218,6 @@ def edit_recipe(category_name, recipe_name):
             user.users[current_user.username].edit_recipe(
                 category_name, name, ingredients)
 
-            ''' flash("Edit the {} recipe in the {} category".format(
-                recipe_name, category_name)) '''
             return render_template('ingredients.html', form=form,
                                    title='Ingredients',
                                    category_name=category_name,
@@ -230,6 +234,7 @@ def edit_recipe(category_name, recipe_name):
 @login_required
 def delete_recipe(category_name, recipe_name):
     """Enables the functionality on the delete_category route
+
     :param category_name: A string:
     :param recipe_name: A string:
     """

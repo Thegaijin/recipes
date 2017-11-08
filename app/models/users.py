@@ -58,24 +58,10 @@ class User(UserMixin):
             :param description: A string: Some details on the category
             :return: The dictionary categories
         '''
-        ''' if description is None:
-            description = 'N/A'
-        updated_category = Category(category_name, description)
-        self.categories[category_name] = updated_category
-        return self.categories '''
 
         # updating just the description
         updated_category = Category(category_name, description)
         self.categories[category_name] = updated_category
-        ''' return self.categories '''
-        ''' else:
-            create_category(new_category_name, description)
-            del self.categories[category_name]
-                self.categories[new_category_name] = self.categories.pop(
-                category_name)
-                self.categories[new_category_name] = self.categories[category_name]
-            del self.categories[category_name]
-                return self.categories '''
 
     def delete_category(self, category_name):
         ''' Deleting a category
@@ -93,10 +79,12 @@ class User(UserMixin):
             Takes in two parameters, checks categories dictionary for key
             category_name. Creates a class instance recipe_name of class Recipe
             then appends the recipe_name to category_name's value, a list.
+
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
             :return: The dictionary of recipes in the category instance
         '''
+
         the_category = self.categories[category_name]
         new_recipe = Recipe(recipe_name, ingredients)
         the_category.recipes[recipe_name] = new_recipe
@@ -106,6 +94,7 @@ class User(UserMixin):
         """ Views all the recipes
         Takes in one parameter, category_name and returns a list of the recipe
         dictionary values
+
         :param category_name: A string:
         :return: A list of the recipe dictionary values
         """
@@ -117,15 +106,14 @@ class User(UserMixin):
             Takes in two parameters, checks categories dictionary for key
             category_name. checks the recipes list in the category for the
             recipe name
+
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
             :return: The list in the category instance
         '''
+
         the_recipes = self.categories[category_name].recipes
         print(the_recipes)
-        ''' recipe_names = [recipe.recipe_name for recipe in the_recipes]
-        if recipe_name in recipe_names: '''
-        ''' return recipe_name '''
         if recipe_name in the_recipes:
             return the_recipes[recipe_name].recipe_name
         return 'A recipe by that name was not found in the category'

@@ -111,8 +111,9 @@ def create_category():
 
     categories = user.users[current_user.username].categories
     the_categories = list(categories.values())
+    form = CategoryForm()
     return render_template('categories.html', form=form,
-                           title="Categories", categories=the_categories)
+                           categories=the_categories)
 
 
 @app.route('/edit_category/<category_name>', methods=['GET', 'POST'])
@@ -121,10 +122,11 @@ def edit_category(category_name):
     """Enables the functionality on the /edit_category route
     :param category_name:
     """
+
     all_categories = user.users[current_user.username].categories
     the_category = user.users[current_user.username].view_category(
         category_name)
-    ''' the_categories = list(all_categories.values()) '''
+
     form = CategoryForm(obj=the_category)
     if form.validate_on_submit():
         name = form.name.data
@@ -136,9 +138,10 @@ def edit_category(category_name):
             all_categories = user.users[current_user.username].create_category(
                 name, description)
             the_categories = list(all_categories.values())
-            return render_template('categories.html', form=form,
+            return redirect(url_for('create_category'))
+            ''' return render_template('categories.html', form=form,
                                    title="The Categories",
-                                   categories=the_categories)
+                                   categories=the_categories) '''
         else:
             user.users[current_user.username].edit_category(
                 category_name, name, description)
@@ -146,13 +149,14 @@ def edit_category(category_name):
             return redirect(url_for('create_category'))
 
     flash("Edit the {} category".format(category_name))
-    return render_template('categories.html', form=form, title="Edit Category")
+    return render_template('categories.html', form=form, title="Categories")
 
 
 @app.route('/view_category/<category_name>', methods=['GET', 'POST'])
 @login_required
 def view_category(category_name):
     """Renders the recipes template to display recipes in the category
+
     :param category_name:
     """
     the_category = user.users[current_user.username].view_category(
@@ -174,15 +178,14 @@ def view_category(category_name):
 @login_required
 def delete_category(category_name):
     """Enables the functionality on the delete_category route
+
     :param category_name:
     """
     form = CategoryForm()
     all_categories = user.users[current_user.username].delete_category(
         category_name)
-    the_categories = list(all_categories.values())
 
-    return render_template('categories.html', title="Categories", form=form,
-                           categories=the_categories)
+    return redirect(url_for('create_category', form=form))
 
 
 @app.route('/edit_recipe/<string:category_name>/<string:recipe_name>',

@@ -5,7 +5,7 @@ from app import app
 from app import login_manager
 from app.models.users import User
 from app.models.yummyApp import YummyApp
-from .forms import RegisterForm, LoginForm, CreateForm
+from .forms import RegisterForm, LoginForm, CategoryForm, RecipeForm
 
 
 # Third party imports
@@ -98,7 +98,7 @@ def create_category():
     :param category_name:
     '''
 
-    form = CreateForm()
+    form = CategoryForm()
     if form.validate_on_submit():
         category_name = form.name.data
         description = form.description.data
@@ -125,7 +125,7 @@ def edit_category(category_name):
     the_category = user.users[current_user.username].view_category(
         category_name)
     ''' the_categories = list(all_categories.values()) '''
-    form = CreateForm(obj=the_category)
+    form = CategoryForm(obj=the_category)
     if form.validate_on_submit():
         name = form.name.data
         description = form.description.data
@@ -157,7 +157,7 @@ def view_category(category_name):
     """
     the_category = user.users[current_user.username].view_category(
         category_name)
-    form = CreateForm()
+    form = RecipeForm()
     if form.validate_on_submit():
         name = form.name.data
         ingredients = form.description.data
@@ -176,7 +176,7 @@ def delete_category(category_name):
     """Enables the functionality on the delete_category route
     :param category_name:
     """
-    form = CreateForm()
+    form = CategoryForm()
     all_categories = user.users[current_user.username].delete_category(
         category_name)
     the_categories = list(all_categories.values())
@@ -193,7 +193,7 @@ def edit_recipe(category_name, recipe_name):
         category_name)
     the_recipe = user.users[current_user.username].view_recipe(
         category_name, recipe_name)
-    form = CreateForm(obj=the_recipe)
+    form = RecipeForm(obj=the_recipe)
     if form.validate_on_submit():
         name = form.name.data
         ingredients = form.description.data
@@ -232,5 +232,5 @@ def delete_recipe(category_name, recipe_name):
     all_recipes = user.users[current_user.username].delete_recipe(category_name,
                                                                   recipe_name)
     the_recipes = list(all_recipes.values())
-    form = CreateForm()
+    form = RecipeForm()
     return redirect(url_for('view_category', category_name=category_name))

@@ -70,7 +70,7 @@ body {
     height: 328px;
     top: 0;
     bottom: 0;
-    color: #b6070d;
+    /* color: #6b6b6b; */
     font-size: 21px;
     font-weight: bold;
     left: 0;
@@ -94,10 +94,11 @@ body {
 /* #FFDB58 */
 
 .welcome p {
-    color: #a3080c;
+    color: greenyellow;
     font-size: 21px;
     line-height: 28px;
     font-weight: bold;
+    text-shadow: 2px 1px black;
 }
 
 

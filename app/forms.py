@@ -21,7 +21,7 @@ class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[
                              DataRequired(), EqualTo('confirm_password')])
-    confirm_password = PasswordField('Repeat Password')
+    confirm_password = PasswordField('Confirm Password')
     submit = SubmitField('Sign Up')
 
     def validate_username(self, field):
@@ -51,9 +51,19 @@ class LoginForm(FlaskForm):
         return True
 
 
-class CreateForm(FlaskForm):
+class CategoryForm(FlaskForm):
     """Form for creating categories"""
 
-    name = StringField('Type here', validators=[DataRequired()])
-    description = StringField('Type here', validators=[DataRequired()])
+    name = StringField('Enter a Category name', validators=[DataRequired()])
+    description = StringField(
+        'Enter a Category Description', validators=[DataRequired()])
+    submit = SubmitField('Create/Edit')
+
+
+class RecipeForm(FlaskForm):
+    """Form for creating categories"""
+
+    name = StringField('Enter a Recipe name', validators=[DataRequired()])
+    description = StringField(
+        'Enter the Ingredients', validators=[DataRequired()])
     submit = SubmitField('Create/Edit')

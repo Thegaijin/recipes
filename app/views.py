@@ -124,19 +124,27 @@ def edit_category(category_name):
     all_categories = user.users[current_user.username].categories
     the_category = user.users[current_user.username].view_category(
         category_name)
-    the_categories = list(all_categories.values())
+    ''' the_categories = list(all_categories.values()) '''
     form = CreateForm(obj=the_category)
     if form.validate_on_submit():
         name = form.name.data
         description = form.description.data
 
-        all_categories = user.users[current_user.username].edit_category(
-            category_name, name, description)
-        the_categories = list(all_categories.values())
+        if name not in all_categories:
+            current_categories = user.users[current_user.username].categories
+            del current_categories[category_name]
+            all_categories = user.users[current_user.username].create_category(
+                name, description)
+            the_categories = list(all_categories.values())
+            return render_template('categories.html', form=form,
+                                   title="The Categories",
+                                   categories=the_categories)
+        else:
+            user.users[current_user.username].edit_category(
+                category_name, name, description)
 
-        return render_template('categories.html', form=form,
-                               title="Edit Category",
-                               categories=the_categories)
+            return redirect(url_for('create_category'))
+
     flash("Edit the {} category".format(category_name))
     return render_template('categories.html', form=form, title="Edit Category")
 
@@ -181,7 +189,7 @@ def delete_category(category_name):
            methods=['GET', 'POST'])
 @login_required
 def edit_recipe(category_name, recipe_name):
-    the_recipes = user.users[current_user.username].view_recipes(
+    all_recipes = user.users[current_user.username].view_recipes(
         category_name)
     the_recipe = user.users[current_user.username].view_recipe(
         category_name, recipe_name)
@@ -190,15 +198,31 @@ def edit_recipe(category_name, recipe_name):
         name = form.name.data
         ingredients = form.description.data
 
-        all_recipes = user.users[current_user.username].edit_recipe(
-            category_name, name, ingredients)
-        the_recipes = list(all_recipes.values())
-        return redirect(url_for('view_category', category_name=category_name))
+        if name not in the_recipes:
+            del all_recipes[recipe_name]
+            the_recipes = user.users[current_user.username].create_recipe(
+                category_name, description)
+            my_recipes = list(the_recipes.values())
+            return render_template('ingredients.html', form=form,
+                                   title="The recipes",
+                                   category_name=category_name,
+                                   recipes=my_recipes)
+        else:
+            user.users[current_user.username].edit_category(
+                category_name, name, description)
 
-    flash("Edit the {} recipe in the {} category".format(
-        recipe_name, category_name))
-    return render_template('ingredients.html', form=form, title='Ingredients',
-                           category_name=category_name, recipes=the_recipes)
+            '''  all_recipes = user.users[current_user.username].edit_recipe(
+                category_name, name, ingredients)
+            the_recipes = list(all_recipes.values())
+            return redirect(url_for('view_category', 
+            category_name=category_name)) '''
+
+            flash("Edit the {} recipe in the {} category".format(
+                recipe_name, category_name))
+            return render_template('ingredients.html', form=form,
+                                   title='Ingredients',
+                                   category_name=category_name,
+                                   recipes=the_recipes)
 
 
 @app.route('/delete_recipe/<category_name>/<recipe_name>',

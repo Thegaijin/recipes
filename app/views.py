@@ -5,7 +5,7 @@ from app import app
 from app import login_manager
 from app.models.users import User
 from app.models.yummyApp import YummyApp
-from .forms import RegisterForm, LoginForm, CategoryForm, RecipeForm
+from .forms import RegisterForm, LoginForm, CategoryForm, RecipeForm, EditForm
 
 
 # Third party imports
@@ -109,13 +109,14 @@ def create_category():
             category_name, description)
         the_categories = list(all_categories.values())
         return render_template('categories.html', form=form,
-                               title="Categories", categories=the_categories)
+                               title="Categories", categories=the_categories,
+                               button='Create Category')
 
     categories = user.users[current_user.username].categories
     the_categories = list(categories.values())
     form = CategoryForm()
     return render_template('categories.html', form=form,
-                           categories=the_categories)
+                           categories=the_categories, button='Create Category')
 
 
 @app.route('/edit_category/<category_name>', methods=['GET', 'POST'])
@@ -130,7 +131,7 @@ def edit_category(category_name):
     the_category = user.users[current_user.username].view_category(
         category_name)
 
-    form = CategoryForm(obj=the_category)
+    form = EditForm(obj=the_category)
     if form.validate_on_submit():
         name = form.name.data
         description = form.description.data
@@ -150,7 +151,8 @@ def edit_category(category_name):
             return redirect(url_for('create_category'))
 
     flash("Edit the {} category".format(category_name))
-    return render_template('categories.html', form=form, title="Categories")
+    return render_template('categories.html', form=form, title="Categories",
+                           button='Edit Category')
 
 
 @app.route('/view_category/<category_name>', methods=['GET', 'POST'])
@@ -172,7 +174,8 @@ def view_category(category_name):
     all_recipes = the_category.recipes
     the_recipes = list(all_recipes.values())
     return render_template('ingredients.html', form=form, title="Recipes",
-                           recipes=the_recipes, category_name=category_name)
+                           recipes=the_recipes, category_name=category_name,
+                           button='Create Recipe')
 
 
 @app.route('/delete_category/<category_name>', methods=['GET', 'POST'])
@@ -202,7 +205,7 @@ def edit_recipe(category_name, recipe_name):
         category_name)
     the_recipe = user.users[current_user.username].view_recipe(
         category_name, recipe_name)
-    form = RecipeForm(obj=the_recipe)
+    form = EditForm(obj=the_recipe)
     if form.validate_on_submit():
         name = form.name.data
         ingredients = form.description.data
@@ -226,7 +229,7 @@ def edit_recipe(category_name, recipe_name):
         recipe_name, category_name))
     return render_template('ingredients.html', form=form,
                            title='Ingredients',
-                           category_name=category_name)
+                           category_name=category_name, button='Edit recipe')
 
 
 @app.route('/delete_recipe/<category_name>/<recipe_name>',

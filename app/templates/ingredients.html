@@ -31,7 +31,7 @@
                 <h4 style="padding: 10px 0; color: white;">{% block create %} To create a recipe{% endblock create %}</h4>
                 <hr class="intro-divider">
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                    <i class="fa fa-plus"></i>Click here
+                    {% block button %}{{button}}{% endblock %}
                 </button>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -73,12 +73,12 @@
                             <td> {{ recipe.ingredients }} </td>
                             <td>
                                 <a href="{{url_for('edit_recipe', category_name=category_name, recipe_name=recipe.recipe_name)}}">
-                                    <i class="fa fa-pencil "></i> Edit
+                                    <span class="glyphicon glyphicon-edit"></span>
                                 </a>
                             </td>
                             <td>
                                 <a href="{{url_for('delete_recipe', category_name=category_name, recipe_name=recipe.recipe_name)}}">
-                                    <i class="fa fa-trash "></i> Delete
+                                    <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>
                         </tr>

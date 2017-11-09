@@ -57,7 +57,7 @@ class CategoryForm(FlaskForm):
     name = StringField('Enter a Category name', validators=[DataRequired()])
     description = StringField(
         'Enter a Category Description', validators=[DataRequired()])
-    submit = SubmitField('Create/Edit')
+    submit = SubmitField('Submit')
 
 
 class RecipeForm(FlaskForm):
@@ -66,4 +66,13 @@ class RecipeForm(FlaskForm):
     name = StringField('Enter a Recipe name', validators=[DataRequired()])
     description = StringField(
         'Enter the Ingredients', validators=[DataRequired()])
-    submit = SubmitField('Create/Edit')
+    submit = SubmitField('Submit')
+
+
+class EditForm(FlaskForm):
+    """Form for creating categories"""
+
+    name = StringField('Enter a Category name', validators=[DataRequired()])
+    description = StringField(
+        'Enter a Category Description', validators=[DataRequired()])
+    submit = SubmitField('Submit')

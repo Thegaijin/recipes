@@ -145,7 +145,7 @@ def edit_category(category_name):
 
         else:
             user.users[current_user.username].edit_category(
-                category_name, name, description)
+                category_name, description)
 
             return redirect(url_for('create_category'))
 

@@ -90,7 +90,7 @@
                     </tbody>
                 </table>
             </div>
-            {% else %} {{ utils.flashed_messages() }}
+            {% else %} {{ utils.flashed_messages(dismissible = True) }}
             <div style="text-align: center">
                 <h3> No categories have been added. </h3>
                 <hr class="intro-divider">

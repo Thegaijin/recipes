@@ -12,7 +12,8 @@ The application has the following features:
 
 * A user can signup for an account in the app 
 * A user can  signin into the app with their credentials
-* A user can create, edit, share and delete categories and or recipes
+* A user can create, edit, share and delete categories
+* A user can create, edit, share and delete recipes
 
 ## Setup
 
@@ -32,12 +33,14 @@ Activate the virtual environment
 
     source venv/bin/activate
 
-Then install all the required dependencies
+Then install all the required dependencies:
 
     pip install -r requirements.txt
 
 To start the application run:
 
-    set FLASK_CONFIG=development
-    set FLASK_APP=run.py
-    flask run
+    python run.py
+
+To run the tests:
+
+    pytest -v

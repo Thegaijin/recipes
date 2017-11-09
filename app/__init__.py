@@ -8,7 +8,7 @@ from flask_login import LoginManager
 # local import
 
 login_manager = LoginManager()
-app = Flask(__name__, instance_relative_config=True)
+app = Flask(__name__)
 app.config.from_object('config')        # Load external config file
 
 Bootstrap(app)

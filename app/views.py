@@ -105,6 +105,20 @@ def create_category():
         category_name = form.name.data
         description = form.description.data
 
+        # change name and description to lowercase
+        category_name = category_name.lower()
+        description = description.lower()
+        present_categories = user.users[current_user.username].categories
+
+        if category_name in present_categories:
+            # Check if category name already exists
+
+            the_categories = list(present_categories.values())
+
+            return render_template('categories.html', form=form,
+                                   categories=the_categories,
+                                   button='Create Category')
+
         all_categories = user.users[current_user.username].create_category(
             category_name, description)
         the_categories = list(all_categories.values())
@@ -136,6 +150,10 @@ def edit_category(category_name):
         name = form.name.data
         description = form.description.data
 
+        # change name and description to lowercase
+        name = name.lower()
+        description = description.lower()
+
         if name not in all_categories:
             current_categories = user.users[current_user.username].categories
             del current_categories[category_name]
@@ -164,10 +182,16 @@ def view_category(category_name):
     """
     the_category = user.users[current_user.username].view_category(
         category_name)
+
     form = RecipeForm()
     if form.validate_on_submit():
         name = form.name.data
         ingredients = form.description.data
+
+        # change name and ingredients to lowercase
+        name = name.lower()
+        ingredients = ingredients.lower()
+
         working_user = user.users[current_user.username]
         all_recipes = working_user.create_recipe(
             category_name, name, ingredients)
@@ -205,10 +229,16 @@ def edit_recipe(category_name, recipe_name):
         category_name)
     the_recipe = user.users[current_user.username].view_recipe(
         category_name, recipe_name)
+
     form = EditForm(obj=the_recipe)
+
     if form.validate_on_submit():
         name = form.name.data
         ingredients = form.description.data
+
+        # change name and ingredients to lowercase
+        name = name.lower()
+        ingredients = ingredients.lower()
 
         if name not in all_recipes:
             del all_recipes[recipe_name]

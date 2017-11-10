@@ -115,13 +115,18 @@ def create_category():
             # Check if category name already exists
 
             the_categories = list(present_categories.values())
-
+            # clear the form
+            form.name.data = ''
+            form.description.data = ''
             return render_template('categories.html', form=form,
                                    categories=the_categories,
                                    button='Create Category')
 
         all_categories = user.users[current_user.username].create_category(
             category_name, description)
+        # clear the form
+        form.name.data = ''
+        form.description.data = ''
         the_categories = list(all_categories.values())
         return render_template('categories.html', form=form,
                                title="Categories", categories=the_categories,
@@ -198,6 +203,9 @@ def view_category(category_name):
             category_name, name, ingredients)
     all_recipes = the_category.recipes
     the_recipes = list(all_recipes.values())
+    # clear the form
+    form.name.data = ''
+    form.description.data = ''
     return render_template('ingredients.html', form=form, title="Recipes",
                            recipes=the_recipes, category_name=category_name,
                            button='Create Recipe')

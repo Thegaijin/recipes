@@ -85,6 +85,16 @@ class UserTestCase(TestCase):
         self.assertEqual(
             'cupcakes', viewed_recipe)
 
+    def test_users_if_recipes_are_viewed(self):
+        ''' Test if all the recipes can be viewed '''
+
+        self.the_user.create_category('Cakes', 'baked goods')
+        self.the_user.create_recipe('Cakes', 'cupcakes', 'cakes in a cup')
+        self.the_user.create_recipe('Cakes', 'buns', 'bun bun')
+        viewed_recipes = self.the_user.view_recipes('Cakes')
+        result_len = len(viewed_recipes)
+        self.assertEqual(2, result_len)
+
     def test_users_recipe_edit(self):
         ''' Test if the recipe can be edited '''
 

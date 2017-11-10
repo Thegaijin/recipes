@@ -121,13 +121,11 @@ class User(UserMixin):
         '''
 
         the_recipes = self.categories[category_name].recipes
-        print(the_recipes)
         if recipe_name in the_recipes:
             return the_recipes[recipe_name].recipe_name
         return 'A recipe by that name was not found in the category'
 
-    def edit_recipe(self, category_name, recipe_name,
-                    ingredients):
+    def edit_recipe(self, category_name, recipe_name, ingredients):
         ''' Edits a recipe
             Takes in two parameters, checks categories dictionary for key
             category_name. checks the recipes list in the category for the

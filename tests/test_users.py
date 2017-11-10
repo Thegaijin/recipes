@@ -41,6 +41,14 @@ class UserTestCase(TestCase):
         self.assertEqual('cakes', viewed.category_name,
                          msg='A category by that name doesn\'t exist')
 
+    def test_user_category_name_edit(self):
+        ''' Test if the category name can be edited '''
+
+        self.the_user.create_category("cakes", 'baked goods')
+        self.the_user.edit_category("Bun", 'bun on a bun')
+        self.assertIn('Bun', self.categories,
+                      msg='The category wasn\'t edited')
+
     def test_user_category_edit(self):
         ''' Test if the category can be edited '''
 

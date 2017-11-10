@@ -1,24 +1,22 @@
 # app/tests/test_users.py
+''' This script is for testing the functionality of the user class '''
 
 # third party imports
 from unittest import TestCase
 
 # local imports
 from app.models.users import User
-from app.models.category import Category
 
 #######################################################################
 #                            CATEGORY TESTS                           #
 #######################################################################
-
-######################## REFACTOR TO UNITTEST  ########################
 
 
 class UserTestCase(TestCase):
     ''' Testing the functionality of the methods in the User Class '''
 
     def setUp(self):
-        self.the_user = User( 'username', 'password')
+        self.the_user = User('username', 'password')
         self.categories = self.the_user.categories
 
     def test_user_is_instance(self):
@@ -28,20 +26,14 @@ class UserTestCase(TestCase):
         self.assertIsInstance(self.the_user, User,
                               msg='Object should be instance of User class')
 
-    ''' def test_user_if_category_doesnt_already_exist(self):
-        Test if the category to be created doesn\'t already exist
-        # FIXME: test gives assertion error
-        self.the_user.create_category(1, "cakes", 'dough on dough on dough')
-        self.assertNotIn("cakes", self.the_user.categories) '''
-
-    def test_user_if_category_can_be_created(self):
+    def test_user_category_creation(self):
         ''' Test if the category is created and added to the list '''
 
         self.the_user.create_category("cakes", 'baked goods')
         self.assertIn('cakes', self.the_user.categories,
                       msg='The category was not added')
 
-    def test_user_if_category_can_be_viewed(self):
+    def test_user_category_view(self):
         ''' Test if the category can be viewed '''
 
         self.the_user.create_category("cakes", 'baked goods')
@@ -49,20 +41,20 @@ class UserTestCase(TestCase):
         self.assertEqual('cakes', viewed.category_name,
                          msg='A category by that name doesn\'t exist')
 
-    def test_user_if_category_can_be_edited(self):
+    def test_user_category_edit(self):
         ''' Test if the category can be edited '''
 
         self.the_user.create_category("cakes", 'baked goods')
-        edited = self.the_user.edit_category("cakes", 'dough on dough')
+        self.the_user.edit_category("cakes", 'dough on dough')
         self.assertEqual('dough on dough',
                          self.categories['cakes'].description,
                          msg='The category description wasn\'t edited')
 
-    def test__user_if_category_can_be_deleted(self):
+    def test__user_category_deletion(self):
         ''' Test if categories can be deleted '''
 
         self.the_user.create_category("cakes", 'baked goods')
-        deleted = self.the_user.delete_category("cakes")
+        self.the_user.delete_category("cakes")
         self.assertNotIn('cakes', self.categories,
                          msg='The category was not deleted')
 
@@ -93,7 +85,7 @@ class UserTestCase(TestCase):
         self.assertEqual(
             'cupcakes', viewed_recipe)
 
-    def test_usersif_recipe_can_be_edited(self):
+    def test_users_recipe_edit(self):
         ''' Test if the recipe can be edited '''
 
         self.the_user.create_category('Cakes', 'baked goods')

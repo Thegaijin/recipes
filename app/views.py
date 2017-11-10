@@ -1,10 +1,11 @@
 # app/views.py
+''' This script links the models to the templates '''
 
 # Local imports
 from app import app
 from app import login_manager
 from app.models.users import User
-from app.models.yummyApp import YummyApp
+from app.models.yummyapp import YummyApp
 from .forms import RegisterForm, LoginForm, CategoryForm, RecipeForm, EditForm
 
 
@@ -93,7 +94,7 @@ def load_user(username):
     return user.users.get(username)
 
 
-@app.route('/create_category',  methods=["GET", "POST"])
+@app.route('/create_category', methods=["GET", "POST"])
 @login_required
 def create_category():
     '''Renders the functionality of the categories route
@@ -271,8 +272,8 @@ def delete_recipe(category_name, recipe_name):
     :param category_name: A string:
     :param recipe_name: A string:
     """
-    all_recipes = user.users[current_user.username].delete_recipe(category_name,
-                                                                  recipe_name)
+    working_user = user.users[current_user.username]
+    all_recipes = working_user.delete_recipe(category_name, recipe_name)
     the_recipes = list(all_recipes.values())
     form = RecipeForm()
     return redirect(url_for('view_category', category_name=category_name))

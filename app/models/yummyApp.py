@@ -1,10 +1,10 @@
 # app/models/yummyApp.py
+''' This script creates(signs up) and signs in users '''
 
 # Local import
 from app.models.users import User
 
 # Third party imports
-from flask_login import logout_user
 from werkzeug.security import check_password_hash
 
 
@@ -48,11 +48,3 @@ class YummyApp(object):
             return "The username and password combination \
                         does not exist"
         return "The username does not exist, please signup"
-
-    # Logout is handlded in the views, method is unnecessary
-    ''' def logout(self, username):
-        """Signs out the currently logged in user
-
-        :param username: A string:
-        """
-        return "The user was logged out" '''

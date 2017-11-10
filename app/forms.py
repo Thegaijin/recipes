@@ -1,18 +1,16 @@
 # app.forms.py
+''' This script has the forms for picking up the data '''
 
 # Local imports
-from app.models.recipe import Recipe
-from app.models.users import User
-from app.models.yummyApp import YummyApp
+from app.models.yummyapp import YummyApp
 
 # Third party imports
 from flask import flash
 from flask_wtf import FlaskForm
-from wtforms import (validators, StringField, SubmitField,
-                     PasswordField, ValidationError)
+from wtforms import (StringField, SubmitField, PasswordField, ValidationError)
 from wtforms.validators import DataRequired, EqualTo
 
-user = YummyApp()
+my_user = YummyApp()
 
 
 class RegisterForm(FlaskForm):
@@ -28,7 +26,7 @@ class RegisterForm(FlaskForm):
         """To check if the username entered already exists"""
 
         username = field.data
-        if username in user.users:
+        if username in my_user.users:
             flash('Username is already in use.')
             raise ValidationError('Username is already in use.')
         return True
@@ -45,7 +43,7 @@ class LoginForm(FlaskForm):
         """To checks if a username by that username exists"""
 
         username = field.data
-        if username not in user.users:
+        if username not in my_user.users:
             flash('Username does not exist.')
             raise ValidationError('Username does not exist.')
         return True

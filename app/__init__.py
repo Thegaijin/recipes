@@ -1,4 +1,5 @@
 # app/__init__.py
+''' This script initialises the app '''
 
 # Third party import
 from flask import Flask

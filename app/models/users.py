@@ -1,4 +1,8 @@
 # app/models/users.py
+''' This script i for creating user class objects and
+    handles the crud functionality for the categories
+    and recipes
+'''
 
 # Third party imports
 from flask_login import UserMixin
@@ -135,9 +139,9 @@ class User(UserMixin):
         the_recipes[recipe_name] = updated_recipe
 
     def delete_recipe(self, category_name, recipe_name):
-        ''' Deletes a recipe. 
+        ''' Deletes a recipe.
             Takes in two parameters, checks categories dictionary for key
-            category_name. checks the recipes list in the category for the 
+            category_name. checks the recipes list in the category for the
             recipe name. deletes the recipe.
 
             :param category_name: A string: the name of the category

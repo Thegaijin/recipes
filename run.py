@@ -1,7 +1,5 @@
 # run.py
-
-# Third party import
-
+''' This script starts the app '''
 # Local import
 from app import app
 

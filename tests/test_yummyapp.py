@@ -1,5 +1,5 @@
 # app/tests/test_yummyapp.py
-''' This script tests the functionality of the yummy class '''
+''' This script tests the functionality of yummy class '''
 
 # third party imports
 from unittest import TestCase

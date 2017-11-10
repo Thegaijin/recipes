@@ -1,5 +1,5 @@
 # app/models/yummyApp.py
-''' This script creates(signs up) and signs in users '''
+''' This script creates(signs up) and sign in users '''
 
 # Local import
 from app.models.users import User

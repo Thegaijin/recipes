@@ -70,7 +70,7 @@ class RecipeForm(FlaskForm):
 class EditForm(FlaskForm):
     """Form for creating categories"""
 
-    name = StringField('Enter a Category name', validators=[DataRequired()])
+    name = StringField('Enter a name', validators=[DataRequired()])
     description = StringField(
-        'Enter a Category Description', validators=[DataRequired()])
+        'Enter the details', validators=[DataRequired()])
     submit = SubmitField('Submit')

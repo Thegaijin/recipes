@@ -30,6 +30,7 @@ class User(UserMixin):
         ''' Creates the Category
             Takes in one parameter, a string and creates an instance of the
             class category and adds it to the categories dictionary
+
             :param category_name: A string: the name of the category to create
             :return: Categories dictionary, with the names as the keys and the
             instance as the value
@@ -48,6 +49,7 @@ class User(UserMixin):
         ''' Displays a Category
             Takes in one parameter, a string and checks the categories
             dictionary for a key that matches the string.
+
             :param category_name: A string: the name of the category to view
             :return: The value of key that matches category name
         '''
@@ -58,6 +60,7 @@ class User(UserMixin):
             Takes in two parameters, 2 strings and checks the categories
             dictionary for a key that matches the first string.Edits the
             details.
+
             :param category_name: A string: the name of the category to edit
             :param description: A string: Some details on the category
             :return: The dictionary categories
@@ -71,6 +74,7 @@ class User(UserMixin):
         ''' Deleting a category
             Takes in one parameter, checks the categories dictionary for a key
             that matches the first string. Deletes the key value pair.
+
             :param category_name: A string: the name of the category to delete
             :return: The remaining categories
         '''

@@ -114,7 +114,6 @@ class YummyApp(object):
             users_categories = self.users[username].categories
             updated_category = Category(category_name, description)
             users_categories[category_name] = updated_category
-            ''' return users_categories '''
 
     def delete_category(self, username, category_name):
         ''' Deleting a category
@@ -185,7 +184,7 @@ class YummyApp(object):
         ''' Views a recipe
             Takes in three parameters, 3 strings. Checks if the username exists
             in the users dictionary. If user exists, then checks the categories
-            dictionary for a key that matches the first string. if it does. it 
+            dictionary for a key that matches the first string. if it does. it
             checks the recipe dictionary for a key that matches recipe_name and
             returns the category instance
 

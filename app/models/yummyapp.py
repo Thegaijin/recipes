@@ -87,7 +87,7 @@ class YummyApp(object):
         return 'Username does not exist'
 
     def edit_category(self, username, category_name, description):
-        ''' Editing a category # FIXME:
+        ''' Editing a category
             Takes in two parameters, 2 strings and checks the categories
             dictionary for a key that matches the first string.Edits the
             details.
@@ -103,9 +103,10 @@ class YummyApp(object):
                                                     description]):
                 raise TypeError('Input should be a string')
 
-                users_categories = self.users[username].categories
-                updated_category = Category(category_name, description)
-                users_categories[category_name] = updated_category
+            users_categories = self.users[username].categories
+            updated_category = Category(category_name, description)
+            users_categories[category_name] = updated_category
+            ''' return users_categories '''
 
     def delete_category(self, username, category_name):
         ''' Deleting a category
@@ -196,8 +197,10 @@ class YummyApp(object):
         if username in self.users:
             users_categories = self.users[username].categories
             the_recipes = users_categories[category_name].recipes
-            updated_recipe = Recipe(category_name, ingredients)
+            updated_recipe = Recipe(recipe_name, ingredients)
             the_recipes[recipe_name] = updated_recipe
+
+        return 'Username does not exist'
 
     def delete_recipe(self, username, category_name, recipe_name):
         ''' Deletes a recipe.

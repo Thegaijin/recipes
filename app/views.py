@@ -122,8 +122,8 @@ def create_category():
                                    categories=the_categories,
                                    button='Create Category')
 
-        all_categories = user.users[current_user.username].create_category(
-            category_name, description)
+        all_categories = user.create_category(current_user.username,
+                                              category_name, description)
         # clear the form
         form.name.data = ''
         form.description.data = ''
@@ -148,10 +148,9 @@ def edit_category(category_name):
     """
 
     all_categories = user.users[current_user.username].categories
-    the_category = user.users[current_user.username].view_category(
-        category_name)
+    the_category = user.view_category(current_user.username, category_name)
 
-    form = EditForm(obj=the_category)
+    form = CategoryForm(obj=the_category)
     if form.validate_on_submit():
         name = form.name.data
         description = form.description.data
@@ -163,14 +162,14 @@ def edit_category(category_name):
         if name not in all_categories:
             current_categories = user.users[current_user.username].categories
             del current_categories[category_name]
-            all_categories = user.users[current_user.username].create_category(
-                name, description)
+            all_categories = user.create_category(current_user.username,
+                                                  name, description)
             the_categories = list(all_categories.values())
             return redirect(url_for('create_category'))
 
         else:
-            user.users[current_user.username].edit_category(
-                category_name, description)
+            user.edit_category(current_user.username,
+                               category_name, description)
 
             return redirect(url_for('create_category'))
 
@@ -186,8 +185,7 @@ def view_category(category_name):
 
     :param category_name:
     """
-    the_category = user.users[current_user.username].view_category(
-        category_name)
+    the_category = user.view_category(current_user.username, category_name)
 
     form = RecipeForm()
     if form.validate_on_submit():
@@ -198,9 +196,8 @@ def view_category(category_name):
         name = name.lower()
         ingredients = ingredients.lower()
 
-        working_user = user.users[current_user.username]
-        all_recipes = working_user.create_recipe(
-            category_name, name, ingredients)
+        all_recipes = user.create_recipe(current_user.username,
+                                         category_name, name, ingredients)
     all_recipes = the_category.recipes
     the_recipes = list(all_recipes.values())
     # clear the form
@@ -219,9 +216,7 @@ def delete_category(category_name):
     :param category_name:
     """
     form = CategoryForm()
-    all_categories = user.users[current_user.username].delete_category(
-        category_name)
-
+    all_categories = user.delete_category(current_user.username, category_name)
     return redirect(url_for('create_category', form=form))
 
 
@@ -234,10 +229,10 @@ def edit_recipe(category_name, recipe_name):
     :param category_name: A string:
     :param recipe_name: A string:
     """
-    all_recipes = user.users[current_user.username].view_recipes(
-        category_name)
-    the_recipe = user.users[current_user.username].view_recipe(
-        category_name, recipe_name)
+    all_recipes = user.view_recipes(current_user.username,
+                                    category_name)
+    the_recipe = user.view_recipe(current_user.username,
+                                  category_name, recipe_name)
 
     form = RecipeForm(obj=the_recipe)
 

@@ -18,10 +18,10 @@ class YummyApp(object):
 
     def signup(self, new_user):
         ''' Signs up new users.
-        Takes an instance of the User class, checks if the username doesn't
-        exist. It adds the user to the users dictionary.
+            Takes an instance of the User class, checks if the username doesn't
+            exist. It adds the user to the users dictionary.
 
-        :param new_user: class instance:
+            :param new_user: class instance:
         '''
 
         if isinstance(new_user, User):
@@ -141,8 +141,8 @@ class YummyApp(object):
         ''' Creates recipes in a specified category.
             Takes in three parameters, 3 strings, checks if the username exists
             in the users dictionary. If user exists,checks categories
-            dictionary for key category_name. Creates a class instance 
-            recipe_name of class Recipe then appends the recipe_name to 
+            dictionary for key category_name. Creates a class instance
+            recipe_name of class Recipe then appends the recipe_name to
             category_name's value, a list.
 
             :param username: A string: the name of the active user
@@ -205,9 +205,9 @@ class YummyApp(object):
         return 'Username does not exist'
 
     def edit_recipe(self, username, category_name, recipe_name, ingredients):
-        ''' Edits a recipe 
+        ''' Edits a recipe
             Takes in three parameters, checks categories dictionary for key
-            category_name. checks the recipes dictionary in the category for 
+            category_name. checks the recipes dictionary in the category for
             the recipe name. replaces it's description with a new one
 
             :param username: A string: the name of the active user
@@ -227,7 +227,7 @@ class YummyApp(object):
         ''' Deletes a recipe.
             Takes in three parameters, 3 strings. Checks if the username exists
             in the users dictionary. If user exists, then checks categories
-            dictionary for keymcategory_name. checks the recipes dictionary in 
+            dictionary for keymcategory_name. checks the recipes dictionary in
             the category for the recipe name. deletes the recipe.
 
             :param username: A string: the name of the active user

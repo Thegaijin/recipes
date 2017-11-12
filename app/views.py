@@ -239,7 +239,7 @@ def edit_recipe(category_name, recipe_name):
     the_recipe = user.users[current_user.username].view_recipe(
         category_name, recipe_name)
 
-    form = EditForm(obj=the_recipe)
+    form = RecipeForm(obj=the_recipe)
 
     if form.validate_on_submit():
         name = form.name.data
@@ -251,14 +251,16 @@ def edit_recipe(category_name, recipe_name):
 
         if name not in all_recipes:
             del all_recipes[recipe_name]
-            the_recipes = user.users[current_user.username].create_recipe(
-                category_name, name, ingredients)
+            the_recipes = user.create_recipe(current_user.username,
+                                             category_name, name, ingredients)
             my_recipes = list(the_recipes.values())
+            form.name.data = ''
+            form.description.data = ''
             return redirect(url_for('view_category',
                                     category_name=category_name))
         else:
-            user.users[current_user.username].edit_recipe(
-                category_name, name, ingredients)
+            user.edit_recipe(current_user.username,
+                             category_name, name, ingredients)
 
             return render_template('ingredients.html', form=form,
                                    title='Ingredients',
@@ -280,8 +282,8 @@ def delete_recipe(category_name, recipe_name):
     :param category_name: A string:
     :param recipe_name: A string:
     """
-    working_user = user.users[current_user.username]
-    all_recipes = working_user.delete_recipe(category_name, recipe_name)
+    all_recipes = user.delete_recipe(current_user.username, category_name,
+                                     recipe_name)
     the_recipes = list(all_recipes.values())
     form = RecipeForm()
     return redirect(url_for('view_category', category_name=category_name))

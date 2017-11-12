@@ -53,9 +53,13 @@ class YummyApp(object):
 
     def create_category(self, username, category_name, description):
         ''' Creates the Category
-            Takes in one parameter, a string and creates an instance of the
-            class category and adds it to the categories dictionary
+            Takes in three parameters, 3 strings, checks if the username exists
+            in the users dictionary. If user exists, creates an instance of the
+            class category and adds it to the categories dictionary with the
+            category name as the key and category name and description as
+            attributes
 
+            :param username: A string: the name of the active user
             :param category_name: A string: the name of the category to create
             :return: Categories dictionary, with the names as the keys and the
             instance as the value
@@ -76,9 +80,11 @@ class YummyApp(object):
 
     def view_category(self, username, category_name):
         ''' Displays a Category
-            Takes in one parameter, a string and checks the categories
+            Takes in two parameters, 2 strings, checks if the username exists
+            in the users dictionary. If user exists then checks the categories
             dictionary for a key that matches the string.
 
+            :param username: A string: the name of the active user
             :param category_name: A string: the name of the category to view
             :return: The value of key that matches category name
         '''
@@ -88,10 +94,12 @@ class YummyApp(object):
 
     def edit_category(self, username, category_name, description):
         ''' Editing a category
-            Takes in two parameters, 2 strings and checks the categories
+            Takes in three parameters, 3 strings, checks if the username exists
+            in the users dictionary. If user exists, checks the categories
             dictionary for a key that matches the first string.Edits the
             details.
 
+            :param username: A string: the name of the active user
             :param category_name: A string: the name of the category to edit
             :param description: A string: Some details on the category
             :return: The dictionary categories
@@ -110,9 +118,12 @@ class YummyApp(object):
 
     def delete_category(self, username, category_name):
         ''' Deleting a category
-            Takes in one parameter, checks the categories dictionary for a key
-            that matches the first string. Deletes the key value pair.
+            Takes in two parameters, 2 strings, checks if the username exists
+            in the users dictionary. If user exists then checks the categories
+            dictionary for a key that matches the first string.
+            Deletes the key:value pair.
 
+            :param username: A string: the name of the active user
             :param category_name: A string: the name of the category to delete
             :return: The remaining categories
         '''
@@ -128,10 +139,13 @@ class YummyApp(object):
 
     def create_recipe(self, username, category_name, recipe_name, ingredients):
         ''' Creates recipes in a specified category.
-            Takes in two parameters, checks categories dictionary for key
-            category_name. Creates a class instance recipe_name of class Recipe
-            then appends the recipe_name to category_name's value, a list.
+            Takes in three parameters, 3 strings, checks if the username exists
+            in the users dictionary. If user exists,checks categories
+            dictionary for key category_name. Creates a class instance 
+            recipe_name of class Recipe then appends the recipe_name to 
+            category_name's value, a list.
 
+            :param username: A string: the name of the active user
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
             :return: The dictionary of recipes in the category instance
@@ -151,11 +165,14 @@ class YummyApp(object):
 
     def view_recipes(self, username, category_name):
         """ Views all the recipes
-        Takes in one parameter, category_name and returns a list of the recipe
-        dictionary values
+            Takes in two parameters, 2 strings, checks if the username exists
+            in the users dictionary. If user exists then checks the categories
+            dictionary for a key that matches the first string and returns
+            a list of the recipe dictionary values
 
-        :param category_name: A string:
-        :return: A list of the recipe dictionary values
+            :param username: A string: the name of the active user
+            :param category_name: A string:
+            :return: A list of the recipe dictionary values
         """
         if username in self.users:
 
@@ -166,13 +183,16 @@ class YummyApp(object):
 
     def view_recipe(self, username, category_name, recipe_name):
         ''' Views a recipe
-            Takes in two parameters, checks categories dictionary for key
-            category_name. checks the recipes list in the category for the
-            recipe name
+            Takes in three parameters, 3 strings. Checks if the username exists
+            in the users dictionary. If user exists, then checks the categories
+            dictionary for a key that matches the first string. if it does. it 
+            checks the recipe dictionary for a key that matches recipe_name and
+            returns the category instance
 
+            :param username: A string: the name of the active user
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
-            :return: The list in the category instance
+            :return: The instance of the recipe name key
         '''
 
         if username in self.users:
@@ -185,11 +205,12 @@ class YummyApp(object):
         return 'Username does not exist'
 
     def edit_recipe(self, username, category_name, recipe_name, ingredients):
-        ''' Edits a recipe # FIXME:
-            Takes in two parameters, checks categories dictionary for key
-            category_name. checks the recipes list in the category for the
-            recipe name. replaces it's description with a new one.abs
+        ''' Edits a recipe 
+            Takes in three parameters, checks categories dictionary for key
+            category_name. checks the recipes dictionary in the category for 
+            the recipe name. replaces it's description with a new one
 
+            :param username: A string: the name of the active user
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
             :return: The dictionary of recipes
@@ -204,10 +225,12 @@ class YummyApp(object):
 
     def delete_recipe(self, username, category_name, recipe_name):
         ''' Deletes a recipe.
-            Takes in two parameters, checks categories dictionary for key
-            category_name. checks the recipes list in the category for the
-            recipe name. deletes the recipe.
+            Takes in three parameters, 3 strings. Checks if the username exists
+            in the users dictionary. If user exists, then checks categories
+            dictionary for keymcategory_name. checks the recipes dictionary in 
+            the category for the recipe name. deletes the recipe.
 
+            :param username: A string: the name of the active user
             :param category_name: A string: the name of the category
             :param recipe_name: A string: the name of the recipe
             :return: The list in the category instance

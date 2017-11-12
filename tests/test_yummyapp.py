@@ -67,7 +67,7 @@ class YummpyAppTestCase(TestCase):
         self.assertEqual('cakes', viewed.category_name,
                          msg='A category by that name doesn\'t exist')
 
-    def test_yummyapp_category_name_edit(self):
+    def test_yummyapp_categoryname_edit(self):
         ''' Test if the category name can be edited '''
 
         self.the_app.signup(self.the_user)
@@ -108,7 +108,7 @@ class YummpyAppTestCase(TestCase):
         categories = self.the_users['username'].categories
         self.assertIn('cupcakes', categories['Cakes'].recipes)
 
-    def test_yummyapp_if_recipe_is_viewed(self):
+    def test_yummyapp_recipe_is_viewed(self):
         ''' Test if the recipe can be viewed '''
 
         self.the_app.signup(self.the_user)
@@ -120,7 +120,7 @@ class YummpyAppTestCase(TestCase):
         self.assertEqual(
             'cupcakes', viewed_recipe)
 
-    def test_yummyapp_recipes_are_viewed(self):
+    def test_yummyapp_recipes_viewed(self):
         ''' Test if all the recipes can be viewed '''
 
         self.the_app.signup(self.the_user)
@@ -132,7 +132,7 @@ class YummpyAppTestCase(TestCase):
         result_len = len(viewed_recipes)
         self.assertEqual(2, result_len)
 
-    def test_yummyapp_recipe_can_edit_recipe(self):
+    def test_yummyapp_can_edit_recipe(self):
         ''' Test if the recipe can be edited '''
 
         self.the_app.signup(self.the_user)

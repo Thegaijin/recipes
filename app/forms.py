@@ -65,12 +65,3 @@ class RecipeForm(FlaskForm):
     description = StringField(
         'Enter the Ingredients', validators=[DataRequired()])
     submit = SubmitField('Submit')
-
-
-class EditForm(FlaskForm):
-    """Form for creating categories"""
-
-    name = StringField('Enter a name', validators=[DataRequired()])
-    description = StringField(
-        'Enter the details', validators=[DataRequired()])
-    submit = SubmitField('Submit')

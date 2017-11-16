@@ -6,7 +6,7 @@ from app import app
 from app import login_manager
 from app.models.users import User
 from app.models.yummyapp import YummyApp
-from .forms import RegisterForm, LoginForm, CategoryForm, RecipeForm, EditForm
+from .forms import RegisterForm, LoginForm, CategoryForm, RecipeForm
 
 
 # Third party imports

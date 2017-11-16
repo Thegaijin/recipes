@@ -46,6 +46,13 @@ class YummpyAppTestCase(TestCase):
                          msg='The username and password combination does not \
                         exist')
 
+    def test_yummyapp_username_doesnt_exist(self):
+        ''' Test if a user doesn't exist '''
+
+        self.the_app.signin('random', 'password')
+        self.assertNotIn('random', self.the_users)
+
+
 #######################################################################
 #                            CATEGORY TESTS                           #
 #######################################################################

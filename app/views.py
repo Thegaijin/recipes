@@ -49,7 +49,7 @@ def register():
     return render_template('home.html', form=form)
 
 
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/login/', methods=["GET", "POST"])
 def signin():
     """Handle requests to the /home route
     Log a user in through the login form
@@ -71,7 +71,7 @@ def signin():
     return render_template('login.html', form=form)
 
 
-@app.route('/logout')
+@app.route('/logout/')
 @login_required
 def logout():
     """Handle requests to the /logout route
@@ -94,7 +94,7 @@ def load_user(username):
     return user.users.get(username)
 
 
-@app.route('/create_category', methods=["GET", "POST"])
+@app.route('/create_category/', methods=["GET", "POST"])
 @login_required
 def create_category():
     '''Renders the functionality of the categories route
@@ -122,12 +122,13 @@ def create_category():
                                    categories=the_categories,
                                    button='Create Category')
 
-        all_categories = user.create_category(current_user.username,
-                                              category_name, description)
+        # all_categories =
+        user.create_category(current_user.username,
+                             category_name, description)
         # clear the form
         form.name.data = ''
         form.description.data = ''
-        the_categories = list(all_categories.values())
+        the_categories = list(present_categories.values())
         return render_template('categories.html', form=form,
                                title="Categories", categories=the_categories,
                                button='Create Category')
@@ -139,7 +140,7 @@ def create_category():
                            categories=the_categories, button='Create Category')
 
 
-@app.route('/edit_category/<category_name>', methods=['GET', 'POST'])
+@app.route('/edit_category/<category_name>/', methods=['GET', 'POST'])
 @login_required
 def edit_category(category_name):
     """Enables the functionality on the /edit_category route
@@ -162,8 +163,8 @@ def edit_category(category_name):
         if name not in all_categories:
             current_categories = user.users[current_user.username].categories
             del current_categories[category_name]
-            all_categories = user.create_category(current_user.username,
-                                                  name, description)
+            user.create_category(current_user.username,
+                                 name, description)
             the_categories = list(all_categories.values())
             return redirect(url_for('create_category'))
 
@@ -178,7 +179,7 @@ def edit_category(category_name):
                            button='Edit Category')
 
 
-@app.route('/view_category/<category_name>', methods=['GET', 'POST'])
+@app.route('/view_category/<category_name>/', methods=['GET', 'POST'])
 @login_required
 def view_category(category_name):
     """Renders the recipes template to display recipes in the category
@@ -208,7 +209,7 @@ def view_category(category_name):
                            button='Create Recipe')
 
 
-@app.route('/delete_category/<category_name>', methods=['GET', 'POST'])
+@app.route('/delete_category/<category_name>/', methods=['GET', 'POST'])
 @login_required
 def delete_category(category_name):
     """Enables the functionality on the delete_category route
@@ -220,7 +221,7 @@ def delete_category(category_name):
     return redirect(url_for('create_category', form=form))
 
 
-@app.route('/edit_recipe/<string:category_name>/<string:recipe_name>',
+@app.route('/edit_recipe/<string:category_name>/<string:recipe_name>/',
            methods=['GET', 'POST'])
 @login_required
 def edit_recipe(category_name, recipe_name):
@@ -268,7 +269,7 @@ def edit_recipe(category_name, recipe_name):
                            category_name=category_name, button='Edit recipe')
 
 
-@app.route('/delete_recipe/<category_name>/<recipe_name>',
+@app.route('/delete_recipe/<category_name>/<recipe_name>/',
            methods=['GET', 'POST'])
 @login_required
 def delete_recipe(category_name, recipe_name):

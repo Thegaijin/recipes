@@ -74,7 +74,7 @@ class YummyApp(object):
             if category_name not in users_categories:
                 new_category = Category(category_name, description)
                 users_categories[category_name] = new_category
-                return users_categories
+                # return users_categories
             return "A category by that name already exists"
         return 'Username does not exist'
 

@@ -18,7 +18,7 @@ Bootstrap(app)
 # For user session management and remember the users’ session
 login_manager.init_app(app)     # initialise login manager
 login_manager.login_message = "You must be logged in to access this page."
-login_manager.login_view = "login"
+login_manager.login_view = "signin"
 
 
 # imported at the end to avoid circular reference

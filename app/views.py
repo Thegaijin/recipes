@@ -29,6 +29,9 @@ def register():
         username = form.username.data
         password = form.password.data
 
+        pattern = re.compile(r"[^a-zA-Z0-9]")
+        username = pattern.sub('', username)
+
         if username not in user.users:
 
             # hashing the password
@@ -107,6 +110,12 @@ def create_category():
         category_name = form.name.data
         description = form.description.data
 
+        pattern1 = re.compile(r"[^a-zA-Z ]")
+        category_name = pattern1.sub('', category_name)
+
+        pattern2 = re.compile(r"[^a-zA-Z., ]")
+        description = pattern2.sub('', description)
+
         # change name and description to lowercase
         category_name = category_name.lower()
         description = description.lower()
@@ -158,6 +167,12 @@ def edit_category(category_name):
         name = form.name.data
         description = form.description.data
 
+        pattern1 = re.compile(r"[^a-zA-Z ]")
+        name = pattern1.sub('', name)
+
+        pattern2 = re.compile(r"[^a-zA-Z., ]")
+        description = pattern2.sub('', description)
+
         # change name and description to lowercase
         name = name.lower()
         description = description.lower()
@@ -194,6 +209,12 @@ def view_category(category_name):
     if form.validate_on_submit():
         name = form.name.data
         ingredients = form.description.data
+
+        pattern1 = re.compile(r"[^a-zA-Z ]")
+        name = pattern1.sub('', name)
+
+        pattern2 = re.compile(r"[^a-zA-Z0-9., ]")
+        ingredients = pattern2.sub('', ingredients)
 
         # change name and ingredients to lowercase
         name = name.lower()
@@ -242,6 +263,12 @@ def edit_recipe(category_name, recipe_name):
     if form.validate_on_submit():
         name = form.name.data
         ingredients = form.description.data
+
+        pattern1 = re.compile(r"[^a-zA-Z ]")
+        name = pattern1.sub('', name)
+
+        pattern2 = re.compile(r"[^a-zA-Z0-9., ]")
+        ingredients = pattern2.sub('', ingredients)
 
         # change name and ingredients to lowercase
         name = name.lower()

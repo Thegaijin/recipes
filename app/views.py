@@ -12,6 +12,7 @@ from .forms import RegisterForm, LoginForm, CategoryForm, RecipeForm
 # Third party imports
 from flask import (flash, redirect, render_template, url_for)
 from flask_login import login_required, login_user, logout_user, current_user
+import re                               # handle non-alpahabetic characters
 from werkzeug.security import generate_password_hash
 
 
@@ -114,15 +115,16 @@ def create_category():
         if category_name in present_categories:
             # Check if category name already exists
 
+            error = 'A category by that name already exists'
             the_categories = list(present_categories.values())
+
             # clear the form
             form.name.data = ''
             form.description.data = ''
             return render_template('categories.html', form=form,
                                    categories=the_categories,
-                                   button='Create Category')
+                                   button='Create Category', error=error)
 
-        # all_categories =
         user.create_category(current_user.username,
                              category_name, description)
         # clear the form
@@ -140,7 +142,7 @@ def create_category():
                            categories=the_categories, button='Create Category')
 
 
-@app.route('/edit_category/<category_name>/', methods=['GET', 'POST'])
+@app.route('/edit_category/<path:category_name>/', methods=['GET', 'POST'])
 @login_required
 def edit_category(category_name):
     """Enables the functionality on the /edit_category route
@@ -179,7 +181,7 @@ def edit_category(category_name):
                            button='Edit Category')
 
 
-@app.route('/view_category/<category_name>/', methods=['GET', 'POST'])
+@app.route('/view_category/<path:category_name>/', methods=['GET', 'POST'])
 @login_required
 def view_category(category_name):
     """Renders the recipes template to display recipes in the category
@@ -209,7 +211,7 @@ def view_category(category_name):
                            button='Create Recipe')
 
 
-@app.route('/delete_category/<category_name>/', methods=['GET', 'POST'])
+@app.route('/delete_category/<path:category_name>/', methods=['GET', 'POST'])
 @login_required
 def delete_category(category_name):
     """Enables the functionality on the delete_category route
@@ -221,7 +223,7 @@ def delete_category(category_name):
     return redirect(url_for('create_category', form=form))
 
 
-@app.route('/edit_recipe/<string:category_name>/<string:recipe_name>/',
+@app.route('/edit_recipe/<path:category_name>/<path:recipe_name>/',
            methods=['GET', 'POST'])
 @login_required
 def edit_recipe(category_name, recipe_name):
@@ -269,7 +271,7 @@ def edit_recipe(category_name, recipe_name):
                            category_name=category_name, button='Edit recipe')
 
 
-@app.route('/delete_recipe/<category_name>/<recipe_name>/',
+@app.route('/delete_recipe/<path:category_name>/<path:recipe_name>/',
            methods=['GET', 'POST'])
 @login_required
 def delete_recipe(category_name, recipe_name):

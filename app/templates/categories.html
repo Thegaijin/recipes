@@ -95,7 +95,9 @@
                 <h3> No categories have been added. </h3>
                 <hr class="intro-divider">
             </div>
-            {% endif %}
+            {% endif %} {% if error %}
+            <p class="error_msg">
+                <strong>Attention:</strong> {{ error }}</p>{% endif %}
         </div>
 
     </div>
